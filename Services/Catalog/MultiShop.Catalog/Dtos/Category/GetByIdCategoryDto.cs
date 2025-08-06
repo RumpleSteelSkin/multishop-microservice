@@ -1,0 +1,6 @@
+namespace MultiShop.Catalog.Dtos.Category;
+
+public class GetByIdCategoryDto
+{
+    public required string Name { get; set; }
+}
