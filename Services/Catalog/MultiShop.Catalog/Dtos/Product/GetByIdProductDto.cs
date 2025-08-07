@@ -11,5 +11,5 @@ public class GetByIdProductDto
 
     public List<GetByIdProductImageDto> Images { get; set; } = [];
     public GetByIdProductDetailDto? Details { get; set; }
-    public GetByIdCategoryDto? Category { get; set; }
+    public string? CategoryId { get; set; }
 }
