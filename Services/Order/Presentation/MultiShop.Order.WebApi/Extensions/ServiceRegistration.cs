@@ -1,13 +1,21 @@
 using MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers;
 using MultiShop.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers;
+using MultiShop.Order.Application.Interfaces;
+using MultiShop.Order.Persistence.Context;
+using MultiShop.Order.Persistence.Repositories;
 
 namespace MultiShop.Order.WebApi.Extensions;
 
 public static class ServiceRegistration
 {
-    public static IServiceCollection AddOrderApplicationServices(this IServiceCollection services,
+    public static IServiceCollection AddOrderWebApiServices(this IServiceCollection services,
         IConfiguration configuration)
     {
+
+        services.AddDbContext<OrderContext>();
+        
+        services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+        
         services.AddScoped<GetOrderDetailByIdQueryHandler>();
         services.AddScoped<GetOrderDetailQueryHandler>();
         services.AddScoped<CreateOrderDetailCommandHandler>();
@@ -19,6 +27,8 @@ public static class ServiceRegistration
         services.AddScoped<CreateAddressCommandHandler>();
         services.AddScoped<UpdateAddressCommandHandler>();
         services.AddScoped<RemoveAddressCommandHandler>();
+        
+        
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

@@ -2,7 +2,7 @@ namespace MultiShop.Order.WebApi.Extensions;
 
 public static class AppRegistration
 {
-    public static WebApplication AddOrderApplicationApp(this WebApplication app)
+    public static WebApplication AddOrderWebApiApp(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
         {
