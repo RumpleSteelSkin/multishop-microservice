@@ -6,6 +6,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{6152
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Catalog", "Services\Catalog\MultiShop.Catalog\MultiShop.Catalog.csproj", "{6AEE07F0-8ED3-42CA-8510-ABFC35744F08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{8566FF64-87DB-4778-B9F1-B2C9A70187C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Discount", "Services\Discount\MultiShop.Discount\MultiShop.Discount.csproj", "{19BE33D8-C333-4704-9102-E814F22DA87E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,11 +18,17 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{615298A0-D84B-419A-A859-9EA2429C45E9} = {57EF7CE3-BA75-4F2E-8D47-3907EF5C8020}
 		{6AEE07F0-8ED3-42CA-8510-ABFC35744F08} = {615298A0-D84B-419A-A859-9EA2429C45E9}
+		{8566FF64-87DB-4778-B9F1-B2C9A70187C6} = {57EF7CE3-BA75-4F2E-8D47-3907EF5C8020}
+		{19BE33D8-C333-4704-9102-E814F22DA87E} = {8566FF64-87DB-4778-B9F1-B2C9A70187C6}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6AEE07F0-8ED3-42CA-8510-ABFC35744F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6AEE07F0-8ED3-42CA-8510-ABFC35744F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEE07F0-8ED3-42CA-8510-ABFC35744F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEE07F0-8ED3-42CA-8510-ABFC35744F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BE33D8-C333-4704-9102-E814F22DA87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BE33D8-C333-4704-9102-E814F22DA87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BE33D8-C333-4704-9102-E814F22DA87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BE33D8-C333-4704-9102-E814F22DA87E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
