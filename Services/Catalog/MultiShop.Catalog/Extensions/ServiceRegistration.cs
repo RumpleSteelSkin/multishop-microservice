@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MultiShop.Catalog.Services.CategoryServices;
@@ -11,6 +12,15 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddCatalogServices(this IServiceCollection services, IConfiguration configuration)
     {
+        #region JWT Settings
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+        {
+            opt.Authority = configuration["Jwt:IdentityServerUrl"];
+            opt.Audience = configuration["Jwt:Audience"];
+            opt.RequireHttpsMetadata = false;
+        });
+        #endregion
+        
         #region API Configuration
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

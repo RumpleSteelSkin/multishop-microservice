@@ -15,6 +15,8 @@ public static class AppRegistration
         #region Middleware Pipeline
         app.UseHttpsRedirection();
         app.MapControllers();
+        app.UseAuthentication();
+        app.UseAuthorization();
         #endregion
 
         #region Application Startup

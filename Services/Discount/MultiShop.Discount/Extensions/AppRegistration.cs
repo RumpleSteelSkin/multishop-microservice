@@ -19,6 +19,8 @@ public static class AppRegistration
         #region Endpoint Configuration
 
         app.MapControllers();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         #endregion
 
