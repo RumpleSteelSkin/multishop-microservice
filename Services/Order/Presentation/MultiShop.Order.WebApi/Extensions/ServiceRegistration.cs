@@ -13,7 +13,9 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddOrderWebApiServices(this IServiceCollection services,
         IConfiguration configuration)
-    { 
+    {
+        #region  JWT Settings
+        
         string n = "7VmAblaUk8xpBr5KaxUye9zlQigKtK1g17biSkN6olexWqT1vUHUYsmCLOvrbmrLT8IhKWILijP06omDV5pi_o7hEifH0i5eNJJVbfoXS0ST_KTE3hCXExOyZh-YOcxZW9zsG3fNuQCNAEWMCLvVhpMHqwxF0UGDmdqJa1b8hdn2FulTezS65ZTEU_dXIU_3uvz_z_PwU6TI1LqnuUjoMqO2rpcbYnkZ728FcKpepPpSz4i26gvcve2wxuUoK3vF7ZL-Bb7J8JmDm1DCR0n3lKA0F7MvEAuObqH2zQiPAvHvPbXWzMAJwfbQyZbRiT5HH_DhceT8qeFiCcGVjw6aXQ";
         string e = "AQAB";
 
@@ -60,7 +62,7 @@ public static class ServiceRegistration
             };
         });
 
-
+        #endregion
 
         #region DB Settings
 
