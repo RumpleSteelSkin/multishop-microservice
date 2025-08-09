@@ -10,32 +10,34 @@ namespace MultiShop.IdentityServer
 {
     public static class Config
     {
-        public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
-        {
+        public static IEnumerable<ApiResource> ApiResources =>
+        [
             new ApiResource("ResourceCatalog") { Scopes = { "CatalogFullPermission", "CatalogReadPermission" } },
             new ApiResource("ResourceDiscount") { Scopes = { "DiscountFullPermission" } },
             new ApiResource("ResourceOrder") { Scopes = { "OrderFullPermission" } },
+            new ApiResource("ResourceCargo") { Scopes = { "CargoFullPermission" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
-        };
+        ];
 
-        public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
-        {
+        public static IEnumerable<IdentityResource> IdentityResources =>
+        [
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email()
-        };
+        ];
 
-        public static IEnumerable<ApiScope> ApiScopes => new ApiScope[]
-        {
+        public static IEnumerable<ApiScope> ApiScopes =>
+        [
             new ApiScope("CatalogFullPermission", "Full access to Catalog"),
             new ApiScope("CatalogReadPermission", "Read access to Catalog"),
             new ApiScope("DiscountFullPermission", "Full access to Discount"),
             new ApiScope("OrderFullPermission", "Full access to Order"),
+            new ApiScope("CargoFullPermission", "Full access to Cargo"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
-        };
+        ];
 
-        public static IEnumerable<Client> Clients => new Client[]
-        {
+        public static IEnumerable<Client> Clients =>
+        [
             new Client
             {
                 ClientId = "MultiShopVisitorId",
@@ -60,14 +62,18 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes =
                 {
-                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CatalogReadPermission",
+                    "CatalogFullPermission",
+                    "DiscountFullPermission",
+                    "OrderFullPermission",
+                    "CatalogReadPermission",
+                    "CargoFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OpenId,
                 },
                 // AccessTokenLifetime = 600
-            },
-        };
+            }
+        ];
     }
 }
