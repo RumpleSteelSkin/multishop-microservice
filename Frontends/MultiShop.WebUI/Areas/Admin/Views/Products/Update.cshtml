@@ -1,0 +1,122 @@
+@model UpdateProductDto
+@{
+    ViewBag.Title = "Products";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Products";
+    ViewBag.v3 = "Update Product";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Update Product</h4>
+                <form method="post" asp-action="Update" asp-controller="Products" asp-area="Admin">
+                    <label>ID</label>
+                    <input type="text" readonly class="form-control" asp-for="Id"/>
+                    <br/>
+                    <label>Name</label>
+                    <input type="text" class="form-control" asp-for="Name"/>
+                    <br/>
+                    <label>Price</label>
+                    <input type="number" step="0.01" class="form-control" asp-for="Price"/>
+                    <br/>
+                    <label>Category</label>
+                    @Html.DropDownListFor(x => x.CategoryId, (ICollection<SelectListItem>)ViewBag.CategoryList, new { @class = "form-control", style = "height:auto; min-height:38px;" })
+                    <br/>
+                    <label>Full Description</label>
+                    <textarea class="form-control" asp-for="Details!.FullDescription"></textarea>
+                    <br/>
+                    <label>Technical Specs</label>
+                    <textarea class="form-control" asp-for="Details!.TechnicalSpecs"></textarea>
+                    <br/>
+                    <label>Manufacturer Info</label>
+                    <textarea class="form-control" asp-for="Details!.ManufacturerInfo"></textarea>
+                    <br/>
+                    <label>Images</label>
+                    <div id="images-container">
+                        @for (int i = 0; i < Model.Images.Count; i++)
+                        {
+                            <div class="image-row d-flex mb-2">
+                                <input type="text" placeholder="Url"
+                                       name="Images[@i].Url"
+                                       value="@Model.Images[i].Url"
+                                       class="form-control me-2" style="display: inline; width: 52%; !important"/>
+
+                                <input type="text" placeholder="AltText"
+                                       name="Images[@i].AltText"
+                                       value="@Model.Images[i].AltText"
+                                       class="form-control me-2" style="display: inline; width: 31%; !important"/>
+
+                                <input type="number" placeholder="Order"
+                                       name="Images[@i].Order"
+                                       value="@Model.Images[i].Order"
+                                       class="form-control me-2" style="display: inline; width: 10%; !important"/>
+
+                                <button type="button" class="btn btn-danger remove-image-btn" style="width: 6%;">-
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                    <br/>
+                    <button type="button" id="add-image" class="btn btn-success mb-3">+ Add Image</button>
+                    <br/>
+                    <br/>
+                    <button class="btn btn-primary">Update Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let imageIndex = @Model.Images.Count;
+    document.getElementById('images-container').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-image-btn')) {
+            e.target.closest('.image-row').remove();
+            reIndexImages();
+        }
+    });
+
+    function reIndexImages() {
+        const rows = document.querySelectorAll('#images-container .image-row');
+        rows.forEach((row, index) => {
+            row.querySelectorAll('input').forEach(input => {
+                if (input.placeholder === 'Url') {
+                    input.name = `Images[${index}].Url`;
+                } else if (input.placeholder === 'AltText') {
+                    input.name = `Images[${index}].AltText`;
+                } else if (input.placeholder === 'Order') {
+                    input.name = `Images[${index}].Order`;
+                }
+            });
+        });
+        imageIndex = rows.length;
+    }
+
+    function createImageRow() {
+        const container = document.getElementById('images-container');
+        const newRow = document.createElement('div');
+        newRow.className = 'image-row d-flex mb-2';
+        newRow.innerHTML = `
+        <input type="text" placeholder="Url" name="Images[${imageIndex}].Url" class="form-control me-2" style="display: inline; width: 52%; !important" />
+        <input type="text" placeholder="AltText" name="Images[${imageIndex}].AltText" class="form-control me-2" style="display: inline; width: 31%; !important" />
+        <input type="number" placeholder="Order" name="Images[${imageIndex}].Order" class="form-control me-2" style="display: inline; width: 10%; !important" />
+        <button type="button" class="btn btn-danger remove-image-btn" style="display: inline; width: 6%; font-size: 2rem; font-weight: bolder; !important">-</button>
+    `;
+        container.appendChild(newRow);
+        imageIndex++;
+
+        newRow.querySelector('.remove-image-btn').addEventListener('click', function () {
+            newRow.remove();
+            reIndexImages();
+        });
+    }
+
+    document.getElementById('add-image').addEventListener('click', function () {
+        createImageRow();
+    });
+
+</script>
