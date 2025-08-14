@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MultiShop.Catalog.Services.CategoryServices;
+using MultiShop.Catalog.Services.FeatureSliderServices;
 using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Settings;
 
@@ -42,6 +43,7 @@ public static class ServiceRegistration
         #region Application Services
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IFeatureSliderService, FeatureSliderService>();
         #endregion
 
         return services;

@@ -13,8 +13,9 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await jsonService.GetAllAsync<ResultProductDto>(ApiRoutes.Products.GetAll));
+            return View(await jsonService.GetAllAsync<ResultProductsWithCategoryDto>(ApiRoutes.Products.GetAllWithCategory));
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()

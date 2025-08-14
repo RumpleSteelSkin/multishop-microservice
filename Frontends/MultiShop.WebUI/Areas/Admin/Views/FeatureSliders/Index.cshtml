@@ -1,9 +1,10 @@
-@model ICollection<ResultProductsWithCategoryDto>
+@model ICollection<ResultFeatureSliderDto>?
+
 @{
-    ViewBag.Title = "Products";
+    ViewBag.Title = "Feature Sliders";
     ViewBag.v1 = "Home";
-    ViewBag.v2 = "Products";
-    ViewBag.v3 = "Product List";
+    ViewBag.v2 = "Feature Sliders";
+    ViewBag.v3 = "Feature Slider List";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
     int count = 0;
 }
@@ -17,9 +18,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Category Name</th>
+                            <th>Title</th>
                             <th>Delete</th>
                             <th>Update</th>
                         </tr>
@@ -30,16 +29,14 @@
                             count++;
                             <tr>
                                 <th scope="row">@count</th>
-                                <td>@item.Name</td>
-                                <td>@item.Price</td>
-                                <td>@item.Category?.Name</td>
-                                <td><a asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
-                                <td><a asp-area="Admin" asp-controller="Products" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a></td>
+                                <td>@item.Title</td>
+                                <td><a asp-area="Admin" asp-controller="FeatureSliders" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+                                <td><a asp-area="Admin" asp-controller="FeatureSliders" asp-action="Update" asp-route-id="@item.Id" class="btn btn-success">Update</a></td>
                             </tr>
                         }
                         </tbody>
                     </table>
-                    <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-primary">Add Product</a>
+                    <a asp-area="Admin" asp-controller="FeatureSliders" asp-action="Create" class="btn btn-primary">Add Feature Slider</a>
                 </div>
             </div>
         </div>
