@@ -13,7 +13,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
-    
+
     public static class FeatureSliders
     {
         private const string Prefix = $"{CatalogBaseUrl}api/FeatureSliders/";
@@ -23,7 +23,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
-    
+
     public static class Products
     {
         private const string Prefix = $"{CatalogBaseUrl}api/Products/";
@@ -34,9 +34,20 @@ public static class ApiRoutes
         public const string Delete = $"{Prefix}Delete";
         public const string GetAllWithCategory = $"{Prefix}GetAllWithCategory";
     }
+
     public static class SpecialOffers
     {
         private const string Prefix = $"{CatalogBaseUrl}api/SpecialOffers/";
+        public const string GetAll = $"{Prefix}GetAll";
+        public const string GetById = $"{Prefix}GetById";
+        public const string Create = $"{Prefix}Create";
+        public const string Update = $"{Prefix}Update";
+        public const string Delete = $"{Prefix}Delete";
+    }
+
+    public static class Features
+    {
+        private const string Prefix = $"{CatalogBaseUrl}api/Features/";
         public const string GetAll = $"{Prefix}GetAll";
         public const string GetById = $"{Prefix}GetById";
         public const string Create = $"{Prefix}Create";
