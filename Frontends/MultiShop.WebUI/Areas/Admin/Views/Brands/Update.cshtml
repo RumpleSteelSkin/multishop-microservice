@@ -1,0 +1,30 @@
+@model UpdateBrandDto
+@{
+    ViewBag.Title = "Brands";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Brands";
+    ViewBag.v3 = "Update Brand";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>@ViewBag.v3</h4>
+                <div class="bs-example">
+                    <form method="post" asp-action="Update" asp-controller="Brands" asp-area="Admin">
+                        <label>ID</label>
+                        <input type="text" readonly class="form-control" asp-for="Id"/>
+                        <label>Name</label>
+                        <input type="text" class="form-control" asp-for="Name"/>
+                        <label>ImageUrl</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl"/>
+                        <br/>
+                        <button class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
