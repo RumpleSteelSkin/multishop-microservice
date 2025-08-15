@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using MongoDB.Driver;
 using MultiShop.Catalog.Dtos.Product;
@@ -19,11 +20,16 @@ public class ProductService(IMapper mapper, IDatabaseSettings settings, IMongoCl
         return mapper.Map<ICollection<ResultProductDto>>(await _productCollection.Find(_ => true).ToListAsync());
     }
 
+    public async Task<ICollection<ResultProductDto>> GetAllAsync(Expression<Func<Product, bool>> predicate)
+    {
+        return mapper.Map<ICollection<ResultProductDto>>(await _productCollection.Find(predicate).ToListAsync());
+    }
+
     public async Task<ICollection<ResultProductsWithCategoryDto>> GetAllWithCategoryAsync()
     {
         var values = await _productCollection.Find(_ => true).ToListAsync();
         foreach (var item in values)
-            item.Category =  _categoryCollection.Find(c => c.Id == item.CategoryId).FirstOrDefault();
+            item.Category = _categoryCollection.Find(c => c.Id == item.CategoryId).FirstOrDefault();
         return mapper.Map<ICollection<ResultProductsWithCategoryDto>>(values);
     }
 

@@ -33,6 +33,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
         public const string GetAllWithCategory = $"{Prefix}GetAllWithCategory";
+        public const string GetCountByCategoryId = $"{Prefix}GetCountByCategoryId";
     }
 
     public static class SpecialOffers

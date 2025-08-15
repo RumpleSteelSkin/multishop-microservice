@@ -15,11 +15,17 @@ namespace MultiShop.Catalog.Controllers
         {
             return Ok(await productService.GetAllAsync());
         }
-        
+
         [HttpGet("GetAllWithCategory")]
         public async Task<IActionResult> GetAllWithCategory()
         {
             return Ok(await productService.GetAllWithCategoryAsync());
+        }
+
+        [HttpGet("GetCountByCategoryId/{id}")]
+        public async Task<IActionResult> GetCountByCategoryId(string id)
+        {
+            return Ok((await productService.GetAllAsync(x => x.CategoryId == id)).Count);
         }
 
         [HttpGet("GetById/{id}")]
