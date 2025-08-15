@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using MultiShop.Catalog.Services.CategoryServices;
 using MultiShop.Catalog.Services.FeatureServices;
 using MultiShop.Catalog.Services.FeatureSliderServices;
+using MultiShop.Catalog.Services.OfferDiscountServices;
 using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Services.SpecialOfferServices;
 using MultiShop.Catalog.Settings;
@@ -48,6 +49,7 @@ public static class ServiceRegistration
         services.AddScoped<IFeatureSliderService, FeatureSliderService>();
         services.AddScoped<ISpecialOfferService, SpecialOfferService>();
         services.AddScoped<IFeatureService, FeatureService>();
+        services.AddScoped<IOfferDiscountService, OfferDiscountService>();
         #endregion
 
         return services;

@@ -1,0 +1,30 @@
+@model CreateOfferDiscountDto
+@{
+    ViewBag.Title = "Offer Discounts";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Offer Discounts";
+    ViewBag.v3 = "Create Offer Discount";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>@ViewBag.v3</h4>
+                <div class="bs-example">
+                    <form method="post">
+                        <label>Title</label>
+                        <input type="text" class="form-control" asp-for="Title"/>
+                        <label>SubTitle</label>
+                        <input type="text" class="form-control" asp-for="SubTitle"/>
+                        <label>ImageUrl</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl"/>
+                        <br/>
+                        <button class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
