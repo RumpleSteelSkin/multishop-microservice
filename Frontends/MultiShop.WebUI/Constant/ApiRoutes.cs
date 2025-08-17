@@ -52,6 +52,7 @@ public static class ApiRoutes
         public const string Delete = $"{Prefix}Delete";
         public const string GetAllWithCategory = $"{Prefix}GetAllWithCategory";
         public const string GetCountByCategoryId = $"{Prefix}GetCountByCategoryId";
+        public const string GetAllWithCategoryByCategoryId = $"{Prefix}GetAllWithCategoryByCategoryId";
     }
 
     public static class SpecialOffers

@@ -33,6 +33,14 @@ public class ProductService(IMapper mapper, IDatabaseSettings settings, IMongoCl
         return mapper.Map<ICollection<ResultProductsWithCategoryDto>>(values);
     }
 
+    public async Task<ICollection<ResultProductsWithCategoryDto>> GetAllWithCategoryByCategoryIdAsync(string id)
+    {
+        var values = await _productCollection.Find(x => x.CategoryId == id).ToListAsync();
+        foreach (var item in values)
+            item.Category = _categoryCollection.Find(c => c.Id == item.CategoryId).FirstOrDefault();
+        return mapper.Map<ICollection<ResultProductsWithCategoryDto>>(values);
+    }
+
     public async Task<GetByIdProductDto> GetByIdAsync(string id)
     {
         return mapper.Map<GetByIdProductDto>(await _productCollection.Find(c => c.Id == id).FirstOrDefaultAsync());

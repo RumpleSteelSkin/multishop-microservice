@@ -4,13 +4,15 @@ namespace MultiShop.WebUI.Controllers
 {
     public class ProductsController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.CId = id;
             return View();
         }
 
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(string id)
         {
+            ViewBag.PId = id;
             return View();
         }
     }
