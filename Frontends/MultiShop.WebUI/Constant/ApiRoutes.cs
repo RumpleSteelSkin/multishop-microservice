@@ -22,6 +22,16 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
+    
+    public static class Abouts
+    {
+        private const string Prefix = $"{CatalogBaseUrl}api/Abouts/";
+        public const string GetAll = $"{Prefix}GetAll";
+        public const string GetById = $"{Prefix}GetById";
+        public const string Create = $"{Prefix}Create";
+        public const string Update = $"{Prefix}Update";
+        public const string Delete = $"{Prefix}Delete";
+    }
     public static class FeatureSliders
     {
         private const string Prefix = $"{CatalogBaseUrl}api/FeatureSliders/";

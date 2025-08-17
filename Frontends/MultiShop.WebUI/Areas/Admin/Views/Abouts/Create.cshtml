@@ -1,0 +1,32 @@
+@model CreateAboutDto
+@{
+    ViewBag.Title = "Abouts";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Abouts";
+    ViewBag.v3 = "Create About";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>@ViewBag.v3</h4>
+                <div class="bs-example">
+                    <form method="post">
+                        <label>Description</label>
+                        <input type="text" class="form-control" asp-for="Description"/>
+                        <label>Address</label>
+                        <input type="text" class="form-control" asp-for="Address"/>
+                        <label>Email</label>
+                        <input type="text" class="form-control" asp-for="Email"/>
+                        <label>Phone</label>
+                        <input type="text" class="form-control" asp-for="Phone"/>
+                        <br/>
+                        <button class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

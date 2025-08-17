@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MultiShop.Catalog.Services.AboutServices;
 using MultiShop.Catalog.Services.BrandServices;
 using MultiShop.Catalog.Services.CategoryServices;
 using MultiShop.Catalog.Services.FeatureServices;
@@ -52,6 +53,7 @@ public static class ServiceRegistration
         services.AddScoped<IFeatureService, FeatureService>();
         services.AddScoped<IOfferDiscountService, OfferDiscountService>();
         services.AddScoped<IBrandService, BrandService>();
+        services.AddScoped<IAboutService, AboutService>();
         #endregion
 
         return services;

@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using MultiShop.DtoLayer.CatalogDtos.AboutDtos;
+using MultiShop.WebUI.Constant;
+using MultiShop.WebUI.Hooks;
 
 namespace MultiShop.WebUI.ViewComponents.UILayoutViewComponents;
 
-public class _FooterUILayoutComponentPartial:ViewComponent
+public class _FooterUILayoutComponentPartial(JsonService jsonService) : ViewComponent
 {
-    public IViewComponentResult Invoke()
+    public async Task<IViewComponentResult> InvokeAsync()
     {
-        return View();
+        return View(await jsonService.GetAllAsync<ResultAboutDto>(ApiRoutes.Abouts.GetAll));
     }
 }
