@@ -1,0 +1,53 @@
+@model UpdateContactDto
+@{
+    ViewBag.Title = "Contacts";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Contacts";
+    ViewBag.v3 = "Update Contact";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>@ViewBag.v3</h4>
+                <div class="bs-example">
+                    <form method="post" asp-action="Update" asp-controller="Contacts" asp-area="Admin">
+                        <label>ID</label>
+                        <input type="text" readonly class="form-control" asp-for="Id"/>
+                        <label>Name Surname</label>
+                        <input type="text" class="form-control" asp-for="NameSurname"/>
+                        <label>Email</label>
+                        <input type="email" class="form-control" asp-for="Email"/>
+                        <label>Subject</label>
+                        <input type="text" class="form-control" asp-for="Subject"/>
+                        <label>Message</label>
+                        <textarea class="form-control" asp-for="Message" rows="3"></textarea>
+                        <br/>
+                        <label style="display: block">IsRead</label>
+                        <div class="form-control" style="font-weight: bolder; !important;">
+                            <input type="checkbox" asp-for="IsRead" id="statusCheckbox"/>
+                            <span id="statusLabel"></span>
+                        </div>
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const checkbox = document.getElementById('statusCheckbox');
+    const statusLabel = document.getElementById('statusLabel');
+
+    function updateStatusText() {
+        statusLabel.textContent = checkbox.checked ? "Read" : "Unread";
+    }
+
+    updateStatusText();
+    checkbox.addEventListener('change', updateStatusText);
+</script>
