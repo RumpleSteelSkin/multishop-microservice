@@ -20,6 +20,9 @@
       <AdditionalFiles Include="Areas\Admin\Views\Brands\Create.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Brands\Index.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Brands\Update.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Comments\Create.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Comments\Index.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Comments\Update.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Products\Index.cshtml" />
       <AdditionalFiles Include="Views\ShoppingCart\Index.cshtml" />
     </ItemGroup>

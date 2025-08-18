@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using MultiShop.DtoLayer.CommentDtos;
+using MultiShop.WebUI.Constant;
+using MultiShop.WebUI.Hooks;
 
 namespace MultiShop.WebUI.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController(JsonService jsonService) : Controller
     {
         public ActionResult Index(string id)
         {
@@ -14,6 +17,22 @@ namespace MultiShop.WebUI.Controllers
         {
             ViewBag.PId = id;
             return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult CreateComment()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateComment(CreateCommentDto comment)
+        {
+            comment.CreatedDate = DateTime.Now;
+            comment.ImageUrl = "https://thispersondoesnotexist.com/";
+            comment.Status = false;
+            await jsonService.PostAsync(ApiRoutes.Comments.Create, comment);
+            return RedirectToAction("Index", "Default");
         }
     }
 }

@@ -3,6 +3,7 @@ namespace MultiShop.WebUI.Constant;
 public static class ApiRoutes
 {
     private const string CatalogBaseUrl = "http://localhost:5150/";
+    private const string CommentBaseUrl = "http://localhost:5151/";
 
     public static class Categories
     {
@@ -13,6 +14,18 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
+
+    public static class Comments
+    {
+        private const string Prefix = $"{CommentBaseUrl}api/Comments/";
+        public const string GetAll = $"{Prefix}GetAll";
+        public const string GetById = $"{Prefix}GetById";
+        public const string Create = $"{Prefix}Create";
+        public const string Update = $"{Prefix}Update";
+        public const string Delete = $"{Prefix}Delete";
+        public const string GetAllByProductId = $"{Prefix}GetAllByProductId";
+    }
+
     public static class Brands
     {
         private const string Prefix = $"{CatalogBaseUrl}api/Brands/";
@@ -22,7 +35,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
-    
+
     public static class Abouts
     {
         private const string Prefix = $"{CatalogBaseUrl}api/Abouts/";
@@ -32,6 +45,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
+
     public static class FeatureSliders
     {
         private const string Prefix = $"{CatalogBaseUrl}api/FeatureSliders/";
@@ -74,7 +88,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
-    
+
     public static class OfferDiscounts
     {
         private const string Prefix = $"{CatalogBaseUrl}api/OfferDiscounts/";

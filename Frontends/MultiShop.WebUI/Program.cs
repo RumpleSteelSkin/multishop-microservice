@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using MultiShop.WebUI.Hooks;
 
 var builder = WebApplication.CreateBuilder(args);

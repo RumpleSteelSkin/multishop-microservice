@@ -18,6 +18,14 @@ public class JsonService(IHttpClientFactory httpClientFactory)
             ? null
             : JsonConvert.DeserializeObject<ICollection<T>>(await response.Content.ReadAsStringAsync());
     }
+    
+    public async Task<ICollection<T>?> GetAllByIdAsync<T>(string url, string id)
+    {
+        var response = await _client.GetAsync($"{url}/{id}");
+        return !response.IsSuccessStatusCode
+            ? null
+            : JsonConvert.DeserializeObject<ICollection<T>>(await response.Content.ReadAsStringAsync());
+    }
 
     public async Task<T?> GetAsync<T>(string url)
     {
@@ -64,8 +72,10 @@ public class JsonService(IHttpClientFactory httpClientFactory)
 
     public async Task PostAsync<TRequest>(string url, TRequest data)
     {
-        await _client.PostAsync(url,
-            new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        var response = await _client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        if (!response.IsSuccessStatusCode)
+            throw new Exception(
+                $"Data extraction error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
     }
 
     public async Task DeleteAsync(string url, string id)

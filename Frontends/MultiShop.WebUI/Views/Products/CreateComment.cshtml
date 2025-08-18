@@ -1,0 +1,62 @@
+@model CreateCommentDto
+
+<div class="col-md-6">
+    <h4 class="mb-4">Leave a review</h4>
+    <small>Your email address will not be published. Required fields are marked *</small>
+    <form method="post" asp-action="CreateComment" asp-controller="Products">
+        <input type="hidden" asp-for="ProductId" value="@ViewBag.PId"/>
+        <div class="d-flex my-3">
+            <p class="mb-0 mr-2">Your Rating * :</p>
+            <div class="text-primary">
+                <div class="star-rating">
+                    @for (int i = 5; i >= 1; i--)
+                    {
+                        <input type="radio" id="star-@i" name="Rating" value="@i" asp-for="Rating"/>
+                        <label for="star-@i">★</label>
+                    }
+                </div>
+            </div>
+        </div>
+        <style>
+        .star-rating {
+            direction: rtl;
+            font-size: 2rem;
+            unicode-bidi: bidi-override;
+            display: inline-flex;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .star-rating input:checked ~ label {
+            color: gold;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+        }
+    </style>
+        <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" class="form-control" id="name" asp-for="NameSurname">
+        </div>
+        <div class="form-group">
+            <label for="email">Your Email *</label>
+            <input type="email" class="form-control" id="email" asp-for="Email">
+        </div>
+        <div class="form-group">
+            <label for="CommentDetail">Your Review *</label>
+            <textarea asp-for="CommentDetail" id="CommentDetail" cols="30" rows="5" class="form-control"></textarea>
+        </div>
+        <div class="form-group mb-0">
+            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+        </div>
+    </form>
+</div>
