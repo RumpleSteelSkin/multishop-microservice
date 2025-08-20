@@ -19,8 +19,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
 </Project>

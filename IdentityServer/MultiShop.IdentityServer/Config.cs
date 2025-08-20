@@ -36,7 +36,7 @@ namespace MultiShop.IdentityServer
 
         public static IEnumerable<Client> Clients =>
         [
-            new Client
+            new()
             {
                 ClientId = "MultiShopVisitorId",
                 ClientName = "Multi Shop Visitor User",
@@ -44,7 +44,7 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes = { "CatalogReadPermission" }
             },
-            new Client
+            new()
             {
                 ClientId = "MultiShopManagerId",
                 ClientName = "Multi Shop Manager User",
@@ -52,7 +52,7 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes = { "CatalogFullPermission", "OrderFullPermission" }
             },
-            new Client
+            new()
             {
                 ClientId = "MultiShopAdminId",
                 ClientName = "Multi Shop Admin User",
@@ -71,7 +71,7 @@ namespace MultiShop.IdentityServer
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OpenId,
                 },
-                // AccessTokenLifetime = 600
+                AccessTokenLifetime = 600
             }
         ];
     }

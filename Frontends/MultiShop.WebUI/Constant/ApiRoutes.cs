@@ -2,8 +2,27 @@ namespace MultiShop.WebUI.Constant;
 
 public static class ApiRoutes
 {
+    private const string IdentityBaseUrl = "http://localhost:5001/";
     private const string CatalogBaseUrl = "http://localhost:5150/";
     private const string CommentBaseUrl = "http://localhost:5151/";
+
+    public static class Registers
+    {
+        private const string Prefix = $"{IdentityBaseUrl}api/Registers/";
+        public const string Register = $"{Prefix}Register";
+    }
+
+    public static class Connect
+    {
+        private const string Prefix = $"{IdentityBaseUrl}Connect/";
+        public const string Token = $"{Prefix}Token";
+    }
+
+    public static class Logins
+    {
+        private const string Prefix = $"{IdentityBaseUrl}api/Logins/";
+        public const string Login = $"{Prefix}Login";
+    }
 
     public static class Categories
     {
@@ -14,6 +33,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}Update";
         public const string Delete = $"{Prefix}Delete";
     }
+
     public static class Contacts
     {
         private const string Prefix = $"{CatalogBaseUrl}api/Contacts/";

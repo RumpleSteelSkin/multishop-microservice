@@ -1,0 +1,73 @@
+@model CreateLoginDto
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>MultiShop Login</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="~/css/opensans-font.css">
+	<link rel="stylesheet" type="text/css" href="~/fonts/line-awesome/css/line-awesome.min.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="~/css/style2.css"/>
+</head>
+<body class="form-v4">
+<div class="page-content">
+	<div class="form-v4-content">
+		<div class="form-left">
+			<h2>MultiShop</h2>
+			<h3>E-Commerce</h3>
+			<p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+			<div class="form-left-last">
+				<a asp-controller="Register" asp-action="Index" class="account">Register</a>
+			</div>
+		</div>
+		<form class="form-detail" method="post" id="myform">
+			<h2>LOGIN FORM</h2>
+			<div class="form-row">
+				<label for="Username">Username</label>
+				<input type="text" name="Username" id="Username" class="input-text" asp-for="Username" required>
+			</div>
+			<div class="form-row form-row-1 ">
+				<label for="Password">Password</label>
+				<input type="password" name="Password" id="Password" class="input-text" asp-for="Password" required>
+			</div>
+
+			<div class="form-row-last">
+				<input type="submit" name="login" class="login" value="Login">
+			</div>
+		</form>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+	jQuery.validator.setDefaults({
+		debug: false,
+		success: function (label) {
+			label.attr('id', 'valid');
+		},
+	});
+	$("#myform").validate({
+		rules: {
+			Password: "required",
+		},
+		messages: {
+			Username: {
+				required: "Username is required",
+			},
+			Password: {
+				required: "Please enter a Password"
+			}
+		}
+	});
+</script>
+</body>
+</html>

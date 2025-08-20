@@ -8,22 +8,15 @@ using MultiShop.IdentityServer.Models;
 
 namespace MultiShop.IdentityServer.Controller
 {
-    [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
+    // [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
     [Route("api/[controller]")]
     [ApiController]
-    public class RegistersController : ControllerBase
+    public class RegistersController(UserManager<ApplicationUser> userManager) : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public RegistersController(UserManager<ApplicationUser> userManager)
-        {
-            _userManager = userManager;
-        }
-
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegisterDto)
         {
-            var result = await _userManager.CreateAsync(new ApplicationUser
+            var result = await userManager.CreateAsync(new ApplicationUser
             {
                 Email = userRegisterDto.Email,
                 Name = userRegisterDto.Name,

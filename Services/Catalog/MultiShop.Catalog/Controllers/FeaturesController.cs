@@ -5,7 +5,7 @@ using MultiShop.Catalog.Services.FeatureServices;
 
 namespace MultiShop.Catalog.Controllers
 {
-    // [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FeaturesController(IFeatureService featureService) : ControllerBase

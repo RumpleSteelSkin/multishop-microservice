@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.19" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     </ItemGroup>
 
@@ -35,6 +36,7 @@
       <Folder Include="Areas\Admin\Models\" />
       <Folder Include="Areas\Admin\Pages\" />
       <Folder Include="Pages\Shared\Components\" />
+      <Folder Include="Services\" />
     </ItemGroup>
 
     <ItemGroup>
