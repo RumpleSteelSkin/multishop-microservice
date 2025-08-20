@@ -1,12 +1,70 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\WORKPLACE\\Rider\\MultiShop\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|d:\\workplace\\rider\\multishop\\apigateways\\multishop.ocelotgateway\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|solutionrelative:apigateways\\multishop.ocelotgateway\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|d:\\workplace\\rider\\multishop\\apigateways\\multishop.ocelotgateway\\multishop.ocelotgateway.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|solutionrelative:apigateways\\multishop.ocelotgateway\\multishop.ocelotgateway.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|d:\\workplace\\rider\\multishop\\apigateways\\multishop.ocelotgateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2C03664-A41E-4A5C-AC33-721019A83CAF}|ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj|solutionrelative:apigateways\\multishop.ocelotgateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "ApiGateways\\MultiShop.OcelotGateway\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\Properties\\launchSettings.json",
+              "RelativeToolTip": "ApiGateways\\MultiShop.OcelotGateway\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-20T12:28:29.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\Program.cs",
+              "RelativeDocumentMoniker": "ApiGateways\\MultiShop.OcelotGateway\\Program.cs",
+              "ToolTip": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\Program.cs",
+              "RelativeToolTip": "ApiGateways\\MultiShop.OcelotGateway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T12:28:08.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MultiShop.OcelotGateway",
+              "DocumentMoniker": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj",
+              "RelativeDocumentMoniker": "ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj",
+              "ToolTip": "D:\\WORKPLACE\\Rider\\MultiShop\\ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj",
+              "RelativeToolTip": "ApiGateways\\MultiShop.OcelotGateway\\MultiShop.OcelotGateway.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-20T12:28:06.69Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
