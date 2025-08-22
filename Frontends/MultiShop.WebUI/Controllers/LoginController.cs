@@ -2,15 +2,11 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.IdentityDtos.LoginDtos;
-// using MultiShop.DtoLayer.IdentityDtos.LoginDtos;
-using MultiShop.WebUI.Constant;
 using MultiShop.WebUI.Hooks;
-using MultiShop.WebUI.Models;
 
 namespace MultiShop.WebUI.Controllers
 {
-    public class LoginController(JsonService jsonService)
-        : Controller
+    public class LoginController(JsonService jsonService) : Controller
     {
         [HttpGet]
         public ActionResult Index()
@@ -21,20 +17,32 @@ namespace MultiShop.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(CreateLoginDto createLoginDto)
         {
-            var token = await jsonService.GetTokenAsync(createLoginDto.Username, createLoginDto.Password);
-            if (token == null)
+            var tokenResponse =
+                await jsonService.GetTokenAsync(createLoginDto.Username!, createLoginDto.Password!);
+            if (tokenResponse?.AccessToken == null)
             {
                 ModelState.AddModelError("", "Invalid username or password");
                 return View(createLoginDto);
             }
 
-            Response.Cookies.Append("access_token", token, new CookieOptions
+            Response.Cookies.Append("access_token", tokenResponse.AccessToken, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.UtcNow.AddHours(1)
+                Expires = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn)
             });
+
+            if (!string.IsNullOrEmpty(tokenResponse.RefreshToken))
+            {
+                Response.Cookies.Append("refresh_token", tokenResponse.RefreshToken, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddDays(7)
+                });
+            }
 
             var claims = new List<Claim>
             {
@@ -48,9 +56,13 @@ namespace MultiShop.WebUI.Controllers
             return RedirectToAction("Index", "Default");
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             Response.Cookies.Delete("access_token");
+            Response.Cookies.Delete("refresh_token");
+
+            await HttpContext.SignOutAsync("cookie");
+
             return RedirectToAction("Index", "Default");
         }
     }

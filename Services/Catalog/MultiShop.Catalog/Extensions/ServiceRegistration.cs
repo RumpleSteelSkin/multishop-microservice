@@ -29,6 +29,22 @@ public static class ServiceRegistration
             opt.RequireHttpsMetadata = false;
         });
 
+        services.AddAuthorization(opt =>
+        {
+            opt.AddPolicy("CatalogRead",
+                policy =>
+                {
+                    policy.RequireAssertion(context =>
+                        context.User.HasClaim("scope", "CatalogReadPermission") ||
+                        context.User.HasClaim("scope", "CatalogFullPermission"));
+                });
+            
+            opt.AddPolicy("CatalogWrite", policy =>
+            {
+                policy.RequireClaim("scope", "CatalogFullPermission");
+            });
+        });
+
         #endregion
 
         #region API Configuration

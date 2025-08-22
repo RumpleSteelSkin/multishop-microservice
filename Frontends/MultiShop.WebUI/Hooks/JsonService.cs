@@ -17,30 +17,90 @@ public class JsonService(
 {
     private readonly HttpClient _client = httpClientFactory.CreateClient();
 
+    /// <summary>
+    /// Access token yoksa refresh token ile yenile.
+    /// Varsa Authorization header’a ekle.
+    /// </summary>
     private async Task AddJwtTokenHeaderAsync()
     {
-        var accessToken = httpContextAccessor.HttpContext?.Request?.Cookies["access_token"];
+        var context = httpContextAccessor.HttpContext;
+        var accessToken = context?.Request.Cookies["access_token"];
+        var refreshToken = context?.Request.Cookies["refresh_token"];
 
-        if (string.IsNullOrWhiteSpace(accessToken))
+        if (string.IsNullOrWhiteSpace(accessToken) && !string.IsNullOrWhiteSpace(refreshToken))
         {
-            var response = await _client.PostAsync(ApiRoutes.Connect.Token,
-                new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "client_id", "MultiShopVisitorId" },
-                    { "client_secret", configuration["Jwt:Secret"]! },
-                    { "grant_type", "client_credentials" }
-                }));
+            var newToken = await RefreshTokenAsync(refreshToken);
+            if (newToken != null)
+            {
+                accessToken = newToken.AccessToken;
+                SaveTokensToCookies(context!, newToken);
+            }
+        }
 
-            response.EnsureSuccessStatusCode();
+        if (!string.IsNullOrWhiteSpace(accessToken))
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        }
+    }
 
-            var content = await response.Content.ReadAsStringAsync();
-            var tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(content);
+    /// <summary>
+    /// Refresh token kullanarak yeni access token alır.
+    /// </summary>
+    private async Task<TokenResponseDto?> RefreshTokenAsync(string refreshToken)
+    {
+        var response = await _client.PostAsync(ApiRoutes.Connect.Token,
+            new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "client_id", "MultiShopAdminId" },
+                { "client_secret", configuration["Jwt:Secret"]! },
+                { "grant_type", "refresh_token" },
+                { "refresh_token", refreshToken }
+            }));
 
-            accessToken = tokenResponse!.AccessToken!;
+        if (!response.IsSuccessStatusCode) return null;
 
-            httpContextAccessor.HttpContext?.Response.Cookies.Append(
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<TokenResponseDto>(content);
+    }
+
+    /// <summary>
+    /// Username/password ile token alır ve cookie’ye yazar.
+    /// </summary>
+    public async Task<TokenResponseDto?> GetTokenAsync(string username, string password)
+    {
+        var response = await _client.PostAsync(ApiRoutes.Connect.Token,
+            new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "client_id", "MultiShopAdminId" },
+                { "client_secret", configuration["Jwt:Secret"]! },
+                { "grant_type", "password" },
+                { "username", username },
+                { "password", password }
+            }));
+
+        if (!response.IsSuccessStatusCode) return null;
+
+        var content = await response.Content.ReadAsStringAsync();
+        var tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(content);
+
+        if (tokenResponse != null)
+        {
+            SaveTokensToCookies(httpContextAccessor.HttpContext!, tokenResponse);
+        }
+
+        return tokenResponse;
+    }
+
+    /// <summary>
+    /// Access ve refresh token’ları cookie’ye yazar.
+    /// </summary>
+    private static void SaveTokensToCookies(HttpContext context, TokenResponseDto tokenResponse)
+    {
+        if (!string.IsNullOrEmpty(tokenResponse.AccessToken))
+        {
+            context.Response.Cookies.Append(
                 "access_token",
-                accessToken,
+                tokenResponse.AccessToken,
                 new CookieOptions
                 {
                     HttpOnly = true,
@@ -50,26 +110,27 @@ public class JsonService(
                 });
         }
 
-        if (!string.IsNullOrWhiteSpace(accessToken))
+        if (!string.IsNullOrEmpty(tokenResponse.RefreshToken))
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            context.Response.Cookies.Append(
+                "refresh_token",
+                tokenResponse.RefreshToken,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddDays(7)
+                });
         }
     }
 
+    #region CRUD Methods
 
     public async Task<ICollection<T>?> GetAllAsync<T>(string url)
     {
         await AddJwtTokenHeaderAsync();
         var response = await _client.GetAsync(url);
-        return !response.IsSuccessStatusCode
-            ? null
-            : JsonConvert.DeserializeObject<ICollection<T>>(await response.Content.ReadAsStringAsync());
-    }
-
-    public async Task<ICollection<T>?> GetAllByIdAsync<T>(string url, string id)
-    {
-        await AddJwtTokenHeaderAsync();
-        var response = await _client.GetAsync($"{url}/{id}");
         return !response.IsSuccessStatusCode
             ? null
             : JsonConvert.DeserializeObject<ICollection<T>>(await response.Content.ReadAsStringAsync());
@@ -88,10 +149,9 @@ public class JsonService(
     {
         await AddJwtTokenHeaderAsync();
         var response = await _client.GetAsync($"{url}/{id}");
-        if (!response.IsSuccessStatusCode)
-            throw new Exception(
-                $"Data extraction error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
-        return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+        return response.StatusCode is HttpStatusCode.Forbidden or HttpStatusCode.Unauthorized
+            ? default
+            : JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
     }
 
     public async Task<bool> PostAsync<TRequest>(string url, TRequest data, ModelStateDictionary modelState)
@@ -99,19 +159,22 @@ public class JsonService(
         await AddJwtTokenHeaderAsync();
         var response = await _client.PostAsync(url,
             new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
-        if (response.IsSuccessStatusCode)
-            return true;
+
+        if (response.IsSuccessStatusCode) return true;
+
         if (response.StatusCode == HttpStatusCode.BadRequest)
         {
             var validationErrors =
                 JsonConvert.DeserializeObject<FluentValidationErrorResponse>(
                     await response.Content.ReadAsStringAsync());
-            if (validationErrors?.Errors == null) return false;
-            foreach (var error in validationErrors.Errors)
+            if (validationErrors?.Errors != null)
             {
-                foreach (var msg in error.Errors!)
+                foreach (var error in validationErrors.Errors)
                 {
-                    modelState.AddModelError(error.Property!, msg);
+                    foreach (var msg in error.Errors!)
+                    {
+                        modelState.AddModelError(error.Property!, msg);
+                    }
                 }
             }
 
@@ -126,18 +189,17 @@ public class JsonService(
         await AddJwtTokenHeaderAsync();
         var response = await _client.PostAsync(url,
             new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
-        if (!response.IsSuccessStatusCode)
-            throw new Exception(
-                $"Data extraction error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
     }
 
     public async Task DeleteAsync(string url, string id)
     {
         await AddJwtTokenHeaderAsync();
         var response = await _client.DeleteAsync($"{url}/{id}");
-        if (!response.IsSuccessStatusCode)
-            throw new Exception(
-                $"Deletion Failed: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+        if (response is
+            { IsSuccessStatusCode: false, StatusCode: HttpStatusCode.Forbidden or HttpStatusCode.Unauthorized })
+        {
+            httpContextAccessor.HttpContext!.Response.StatusCode = (int)response.StatusCode;
+        }
     }
 
     public async Task UpdateAsync<T>(string url, T data)
@@ -148,6 +210,16 @@ public class JsonService(
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Update failed: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
     }
+
+    public async Task<ICollection<T>?> GetAllByIdAsync<T>(string url, string id)
+    {
+        await AddJwtTokenHeaderAsync();
+        var response = await _client.GetAsync($"{url}/{id}");
+        return !response.IsSuccessStatusCode
+            ? null
+            : JsonConvert.DeserializeObject<ICollection<T>>(await response.Content.ReadAsStringAsync());
+    }
+
 
     public async Task<ICollection<SelectListItem>> GetSelectListAsync<T>(string url, Func<T, string?> textSelector,
         Func<T, string?> valueSelector)
@@ -160,26 +232,5 @@ public class JsonService(
                 .ToList();
     }
 
-    public async Task<string?> GetTokenAsync(string? username, string? password)
-    {
-        if (username is null || password is null)
-            throw new Exception("Username and password are required");
-
-        var response = await _client.PostAsync(ApiRoutes.Connect.Token, new FormUrlEncodedContent(
-            new Dictionary<string, string>
-            {
-                { "client_id", "MultiShopAdminId" },
-                { "client_secret", configuration["Jwt:Secret"]! },
-                { "grant_type", "password" },
-                { "username", username },
-                { "password", password }
-            }));
-
-        if (!response.IsSuccessStatusCode)
-            return null;
-
-        var content = await response.Content.ReadAsStringAsync();
-        var tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(content);
-        return tokenResponse?.AccessToken;
-    }
+    #endregion
 }

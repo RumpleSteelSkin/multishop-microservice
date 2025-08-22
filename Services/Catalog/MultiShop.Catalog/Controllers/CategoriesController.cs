@@ -11,18 +11,21 @@ namespace MultiShop.Catalog.Controllers
     public class CategoriesController(ICategoryService categoryService) : ControllerBase
     {
         [HttpGet("GetAll")]
+        [Authorize(Policy = "CatalogRead")]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await categoryService.GetAllAsync());
         }
 
         [HttpGet("GetById/{id}")]
+        [Authorize(Policy = "CatalogRead")]
         public async Task<IActionResult> GetById(string id)
         {
             return Ok(await categoryService.GetByIdAsync(id));
         }
 
         [HttpPost("Create")]
+        [Authorize(Policy = "CatalogWrite")]
         public async Task<IActionResult> Create(CreateCategoryDto categoryDto)
         {
             await categoryService.CreateAsync(categoryDto);
@@ -30,6 +33,7 @@ namespace MultiShop.Catalog.Controllers
         }
 
         [HttpDelete("Delete/{id}")]
+        [Authorize(Policy = "CatalogWrite")]
         public async Task<IActionResult> Delete(string id)
         {
             await categoryService.DeleteAsync(id);
@@ -37,6 +41,7 @@ namespace MultiShop.Catalog.Controllers
         }
 
         [HttpPut("Update")]
+        [Authorize(Policy = "CatalogWrite")]
         public async Task<IActionResult> Update(UpdateCategoryDto categoryDto)
         {
             await categoryService.UpdateAsync(categoryDto);

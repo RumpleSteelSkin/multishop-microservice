@@ -10,13 +10,38 @@
         }
       ],
       "UpstreamHttpMethod": [
-        "Get",
+        "Get"
+      ],
+      "UpstreamPathTemplate": "/services/catalog/{everything}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CatalogReadPermission",
+          "CatalogFullPermission"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5150
+        }
+      ],
+      "UpstreamHttpMethod": [
         "Post",
         "Put",
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/catalog/{everything}",
-      "UpstreamScheme": "http"
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CatalogFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -34,7 +59,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/comment/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CommentFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -52,7 +83,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/discount/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "DiscountFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -70,7 +107,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "OrderFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -88,7 +131,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/cargo/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CargoFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -106,7 +155,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/basket/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "BasketFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -124,7 +179,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/payment/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "PaymentFullPermission"
+        ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -142,7 +203,13 @@
         "Delete"
       ],
       "UpstreamPathTemplate": "/services/images/{everything}",
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "ImagesFullPermission"
+        ]
+      }
     }
   ],
   "GlobalConfiguration": {

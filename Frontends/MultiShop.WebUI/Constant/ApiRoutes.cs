@@ -3,128 +3,135 @@ namespace MultiShop.WebUI.Constant;
 public static class ApiRoutes
 {
     private const string IdentityBaseUrl = "http://localhost:5001/";
-    private const string CatalogBaseUrl = "http://localhost:5150/";
-    private const string CommentBaseUrl = "http://localhost:5151/";
+    private const string OcelotBaseUrl = "http://localhost:5000/";
+    private const string CatalogService = $"{OcelotBaseUrl}services/catalog/";
+    private const string CommentService = $"{OcelotBaseUrl}services/comment/";
+
+    public static class Users
+    {
+        private const string Prefix = $"{IdentityBaseUrl}api/{nameof(Users)}/";
+        public const string GetUserInfo = $"{Prefix}{nameof(GetUserInfo)}";
+    }
 
     public static class Registers
     {
-        private const string Prefix = $"{IdentityBaseUrl}api/Registers/";
-        public const string Register = $"{Prefix}Register";
-    }
-
-    public static class Connect
-    {
-        private const string Prefix = $"{IdentityBaseUrl}Connect/";
-        public const string Token = $"{Prefix}Token";
+        private const string Prefix = $"{IdentityBaseUrl}api/{nameof(Registers)}/";
+        public const string Register = $"{Prefix}{nameof(Register)}";
     }
 
     public static class Logins
     {
-        private const string Prefix = $"{IdentityBaseUrl}api/Logins/";
-        public const string Login = $"{Prefix}Login";
+        private const string Prefix = $"{IdentityBaseUrl}api/{nameof(Logins)}/";
+        public const string Login = $"{Prefix}{nameof(Login)}";
+    }
+
+    public static class Connect
+    {
+        private const string Prefix = $"{IdentityBaseUrl}{nameof(Connect)}/";
+        public const string Token = $"{Prefix}{nameof(Token)}";
     }
 
     public static class Categories
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/Categories/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(Categories)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
 
     public static class Contacts
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/Contacts/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
-    }
-
-    public static class Comments
-    {
-        private const string Prefix = $"{CommentBaseUrl}api/Comments/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
-        public const string GetAllByProductId = $"{Prefix}GetAllByProductId";
-    }
-
-    public static class Brands
-    {
-        private const string Prefix = $"{CatalogBaseUrl}api/Brands/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(Contacts)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
 
     public static class Abouts
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/Abouts/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(Abouts)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
 
     public static class FeatureSliders
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/FeatureSliders/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
-    }
-
-    public static class Products
-    {
-        private const string Prefix = $"{CatalogBaseUrl}api/Products/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
-        public const string GetAllWithCategory = $"{Prefix}GetAllWithCategory";
-        public const string GetCountByCategoryId = $"{Prefix}GetCountByCategoryId";
-        public const string GetAllWithCategoryByCategoryId = $"{Prefix}GetAllWithCategoryByCategoryId";
-    }
-
-    public static class SpecialOffers
-    {
-        private const string Prefix = $"{CatalogBaseUrl}api/SpecialOffers/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(FeatureSliders)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
 
     public static class Features
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/Features/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(Features)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
 
     public static class OfferDiscounts
     {
-        private const string Prefix = $"{CatalogBaseUrl}api/OfferDiscounts/";
-        public const string GetAll = $"{Prefix}GetAll";
-        public const string GetById = $"{Prefix}GetById";
-        public const string Create = $"{Prefix}Create";
-        public const string Update = $"{Prefix}Update";
-        public const string Delete = $"{Prefix}Delete";
+        private const string Prefix = $"{CatalogService}{nameof(OfferDiscounts)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+
+    public static class SpecialOffers
+    {
+        private const string Prefix = $"{CatalogService}{nameof(SpecialOffers)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+
+    public static class Comments
+    {
+        private const string Prefix = $"{CommentService}{nameof(Comments)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetAllByProductId = $"{Prefix}{nameof(GetAllByProductId)}";
+    }
+
+    public static class Brands
+    {
+        private const string Prefix = $"{CatalogService}{nameof(Brands)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+
+    public static class Products
+    {
+        private const string Prefix = $"{CatalogService}{nameof(Products)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetAllWithCategory = $"{Prefix}{nameof(GetAllWithCategory)}";
+        public const string GetCountByCategoryId = $"{Prefix}{nameof(GetCountByCategoryId)}";
+        public const string GetAllWithCategoryByCategoryId = $"{Prefix}{nameof(GetAllWithCategoryByCategoryId)}";
     }
 }
