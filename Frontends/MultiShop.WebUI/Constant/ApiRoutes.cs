@@ -6,6 +6,18 @@ public static class ApiRoutes
     private const string OcelotBaseUrl = "http://localhost:5000/";
     private const string CatalogService = $"{OcelotBaseUrl}services/catalog/";
     private const string CommentService = $"{OcelotBaseUrl}services/comment/";
+    private const string BasketService = $"{OcelotBaseUrl}services/basket/";
+
+    public static class Baskets
+    {
+        private const string Prefix = $"{BasketService}{nameof(Baskets)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string SaveMyBasket = $"{Prefix}{nameof(SaveMyBasket)}";
+        public const string DeleteMyBasket = $"{Prefix}{nameof(DeleteMyBasket)}";
+        public const string AddBasketItem = $"{Prefix}{nameof(AddBasketItem)}";
+        public const string RemoveBasketItem = $"{Prefix}{nameof(RemoveBasketItem)}";
+        public const string UpdateQuantity = $"{Prefix}{nameof(UpdateQuantity)}";
+    }
 
     public static class Users
     {

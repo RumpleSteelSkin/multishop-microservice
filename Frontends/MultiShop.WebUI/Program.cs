@@ -57,7 +57,7 @@ app.UseMiddleware<RedirectUnauthorizedMiddleware>();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=ShoppingCart}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "areas",

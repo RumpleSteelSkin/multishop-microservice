@@ -1,3 +1,5 @@
+@model BasketTotalDto
+
 <div class="col-lg-8 table-responsive mb-5">
     <table class="table table-light table-borderless table-hover text-center mb-0">
         <thead class="thead-dark">
@@ -10,31 +12,79 @@
         </tr>
         </thead>
         <tbody class="align-middle">
-        <tr>
-            <td class="align-middle"><img src="~/img/product-1.jpg" alt="" style="width: 50px; height: 50px;"> Sneakers
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-                <div class="input-group quantity mx-auto" style="width: 100px;">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm btn-primary btn-minus">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center"
-                           value="1">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm btn-primary btn-plus">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-                <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
-            </td>
-        </tr>
+        @if (Model.BasketItems is not null)
+        {
+            foreach (var item in Model.BasketItems)
+            {
+                <tr id="row-@item.ProductId">
+                    <td class="align-middle">
+                        <img src="~/@item.ProductImageUrl" style="width:50px;height:50px;">
+                        @item.ProductName
+                    </td>
+                    <td class="align-middle" data-price="@item.Price">$@item.Price</td>
+                    <td class="align-middle">
+                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-minus"
+                                        onclick="changeQuantity('@item.ProductId', -1)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input id="qty-@item.ProductId"
+                                   class="form-control form-control-sm text-center bg-secondary border-0"
+                                   value="@item.Quantity" onchange="changeQuantity('@item.ProductId', 0, this.value)">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-plus"
+                                        onclick="changeQuantity('@item.ProductId', 1)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="align-middle item-total">$@(item.Quantity * item.Price)</td>
+                    <td class="align-middle">
+                        <a class="btn btn-sm btn-danger" asp-controller="ShoppingCart" asp-action="RemoveBasketItem"
+                           asp-route-productId="@item.ProductId">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
         </tbody>
     </table>
 </div>
+
+<script>
+    window.changeQuantity = async function (productId, delta = 0, inputValue = null) {
+        const input = document.getElementById(`qty-${productId}`);
+        const row = document.getElementById(`row-${productId}`);
+        const priceCell = row.querySelector('[data-price]');
+        const totalCell = row.querySelector('.item-total');
+
+        const price = parseFloat(priceCell.dataset.price);
+        if (isNaN(price)) return;
+
+        let quantity;
+
+        if (inputValue !== null) {
+            quantity = parseInt(inputValue);
+        } else {
+            quantity = parseInt(input.value) + delta;
+        }
+
+        if (isNaN(quantity) || quantity < 1) quantity = 1;
+
+        try {
+            const url = `/ShoppingCart/UpdateQuantity?productId=${productId}&quantity=${quantity}`;
+            await fetch(url, {method: 'POST'});
+            input.value = quantity;
+            totalCell.textContent = `$${(quantity * price).toFixed(2)}`;
+        } catch (err) {
+            console.error("Update failed:", err);
+        }
+    }
+
+</script>
+
+

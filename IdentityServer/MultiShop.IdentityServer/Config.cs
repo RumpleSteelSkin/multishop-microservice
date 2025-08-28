@@ -13,7 +13,8 @@ public static class Config
         new("ResourceOrder") { Scopes = { "OrderFullPermission" } },
         new("ResourceCargo") { Scopes = { "CargoFullPermission" } },
         new("ResourceBasket") { Scopes = { "BasketFullPermission" } },
-        new("ResourceComment") { Scopes = { "CommentFullPermission" } },
+        new("ResourceComment")
+            { Scopes = { "CommentFullPermission", "CommentHalfPermission", "CommentReadPermission" } },
         new("ResourcePayment") { Scopes = { "PaymentFullPermission" } },
         new("ResourceImages") { Scopes = { "ImagesFullPermission" } },
         new("ResourceOcelot") { Scopes = { "OcelotFullPermission" } },
@@ -39,6 +40,8 @@ public static class Config
         new("PaymentFullPermission", "Full access to Payment"),
         new("ImagesFullPermission", "Full access to Images"),
         new("CommentFullPermission", "Full access to Comment"),
+        new("CommentReadPermission", "Read access to Comment"),
+        new("CommentHalfPermission", "Half access to Comment"),
         new(IdentityServerConstants.LocalApi.ScopeName)
     ];
 
@@ -52,7 +55,7 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogReadPermission", "OcelotFullPermission", "CommentFullPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentReadPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
             }
         },
@@ -64,7 +67,7 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogFullPermission", "OrderFullPermission", "OcelotFullPermission", "CommentFullPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentHalfPermission", "BasketFullPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.Profile,
@@ -82,7 +85,6 @@ public static class Config
                 "CatalogFullPermission",
                 "DiscountFullPermission",
                 "OrderFullPermission",
-                "CatalogReadPermission",
                 "CargoFullPermission",
                 "BasketFullPermission",
                 "OcelotFullPermission",

@@ -17,10 +17,6 @@ public class JsonService(
 {
     private readonly HttpClient _client = httpClientFactory.CreateClient();
 
-    /// <summary>
-    /// Access token yoksa refresh token ile yenile.
-    /// Varsa Authorization header’a ekle.
-    /// </summary>
     private async Task AddJwtTokenHeaderAsync()
     {
         var context = httpContextAccessor.HttpContext;
@@ -43,9 +39,6 @@ public class JsonService(
         }
     }
 
-    /// <summary>
-    /// Refresh token kullanarak yeni access token alır.
-    /// </summary>
     private async Task<TokenResponseDto?> RefreshTokenAsync(string refreshToken)
     {
         var response = await _client.PostAsync(ApiRoutes.Connect.Token,
@@ -63,9 +56,6 @@ public class JsonService(
         return JsonConvert.DeserializeObject<TokenResponseDto>(content);
     }
 
-    /// <summary>
-    /// Username/password ile token alır ve cookie’ye yazar.
-    /// </summary>
     public async Task<TokenResponseDto?> GetTokenAsync(string username, string password)
     {
         var response = await _client.PostAsync(ApiRoutes.Connect.Token,
@@ -91,9 +81,6 @@ public class JsonService(
         return tokenResponse;
     }
 
-    /// <summary>
-    /// Access ve refresh token’ları cookie’ye yazar.
-    /// </summary>
     private static void SaveTokensToCookies(HttpContext context, TokenResponseDto tokenResponse)
     {
         if (!string.IsNullOrEmpty(tokenResponse.AccessToken))
@@ -230,6 +217,12 @@ public class JsonService(
             ? []
             : data.Select(item => new SelectListItem { Text = textSelector(item), Value = valueSelector(item) })
                 .ToList();
+    }
+
+    public async Task FireAndForgetPostAsync(string baseUrl, params string[] routeParams)
+    {
+        await AddJwtTokenHeaderAsync();
+        await _client.PostAsync($"{baseUrl}/{string.Join("/", routeParams)}", null);
     }
 
     #endregion

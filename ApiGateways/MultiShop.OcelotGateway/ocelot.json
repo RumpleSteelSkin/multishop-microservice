@@ -1,5 +1,7 @@
 {
   "Routes": [
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -43,6 +45,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -53,8 +57,51 @@
         }
       ],
       "UpstreamHttpMethod": [
-        "Get",
-        "Post",
+        "Get"
+      ],
+      "UpstreamPathTemplate": "/services/comment/{everything}",
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CommentFullPermission",
+          "CommentReadPermission",
+          "CommentHalfPermission"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5151
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "UpstreamPathTemplate": "/services/comment/{everything}",
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [
+          "CommentFullPermission",
+          "CommentHalfPermission"
+        ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5151
+        }
+      ],
+      "UpstreamHttpMethod": [
         "Put",
         "Delete"
       ],
@@ -67,6 +114,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -91,6 +140,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -115,6 +166,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -139,6 +192,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -163,6 +218,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -187,6 +244,8 @@
         ]
       }
     },
+    
+    
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
