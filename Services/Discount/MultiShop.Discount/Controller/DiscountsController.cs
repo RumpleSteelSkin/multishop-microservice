@@ -11,18 +11,28 @@ namespace MultiShop.Discount.Controller
     public class DiscountsController(IDiscountService discountService) : ControllerBase
     {
         [HttpGet("GetAll")]
+        [Authorize(Policy = "DiscountHalf")]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await discountService.GetAll());
         }
 
         [HttpGet("GetById/{id:int}")]
+        [Authorize(Policy = "DiscountHalf")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await discountService.GetById(id));
         }
 
+        [HttpGet("GetCodeDetailByCode/{code}")]
+        [Authorize(Policy = "DiscountHalf")]
+        public async Task<IActionResult> GetCodeDetailByCode(string code)
+        {
+            return Ok(await discountService.GetCodeDetailByCode(code));
+        }
+
         [HttpPost("Create")]
+        [Authorize(Policy = "DiscountWrite")]
         public async Task<IActionResult> Create(CreateCouponDto createCouponDto)
         {
             await discountService.Create(createCouponDto);
@@ -30,6 +40,7 @@ namespace MultiShop.Discount.Controller
         }
 
         [HttpPut("Update")]
+        [Authorize(Policy = "DiscountWrite")]
         public async Task<IActionResult> Update(UpdateCouponDto updateCouponDto)
         {
             await discountService.Update(updateCouponDto);
@@ -37,6 +48,7 @@ namespace MultiShop.Discount.Controller
         }
 
         [HttpDelete("Delete/{id:int}")]
+        [Authorize(Policy = "DiscountWrite")]
         public async Task<IActionResult> Delete(int id)
         {
             await discountService.Delete(id);

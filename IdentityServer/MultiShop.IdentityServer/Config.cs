@@ -9,7 +9,8 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
     [
         new("ResourceCatalog") { Scopes = { "CatalogFullPermission", "CatalogReadPermission" } },
-        new("ResourceDiscount") { Scopes = { "DiscountFullPermission" } },
+        new("ResourceDiscount")
+            { Scopes = { "DiscountFullPermission", "DiscountReadPermission", "DiscountHalfPermission" } },
         new("ResourceOrder") { Scopes = { "OrderFullPermission" } },
         new("ResourceCargo") { Scopes = { "CargoFullPermission" } },
         new("ResourceBasket") { Scopes = { "BasketFullPermission" } },
@@ -33,6 +34,8 @@ public static class Config
         new("CatalogFullPermission", "Full access to Catalog"),
         new("CatalogReadPermission", "Read access to Catalog"),
         new("DiscountFullPermission", "Full access to Discount"),
+        new("DiscountHalfPermission", "Half access to Discount"),
+        new("DiscountReadPermission", "Read access to Discount"),
         new("OrderFullPermission", "Full access to Order"),
         new("CargoFullPermission", "Full access to Cargo"),
         new("BasketFullPermission", "Full access to Basket"),
@@ -55,7 +58,7 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogReadPermission", "OcelotFullPermission", "CommentReadPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentReadPermission","DiscountReadPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
             }
         },
@@ -67,7 +70,7 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogReadPermission", "OcelotFullPermission", "CommentHalfPermission", "BasketFullPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentHalfPermission", "BasketFullPermission","DiscountHalfPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.Profile,

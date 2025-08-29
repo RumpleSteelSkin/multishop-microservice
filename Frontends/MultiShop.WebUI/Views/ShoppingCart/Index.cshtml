@@ -18,7 +18,8 @@
 <div class="container-fluid">
     <div class="row px-xl-5">
         @await Component.InvokeAsync("_ProductListShoppingCartComponentPartial")
-        @await Component.InvokeAsync("_DiscountCouponShoppingCartComponentPartial")
+        @* @await Component.InvokeAsync("_DiscountCouponShoppingCartComponentPartial") *@
+        @await Html.PartialAsync("~/Views/Discount/ConfirmDiscountCoupon.cshtml")
     </div>
 </div>
 <!-- Cart End -->

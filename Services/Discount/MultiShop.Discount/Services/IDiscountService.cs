@@ -9,4 +9,6 @@ public interface IDiscountService
     Task Update(UpdateCouponDto updateCouponDto);
     Task Delete(int id);
     Task<GetByIdCouponDto> GetById(int id);
+    Task<ResultCouponDto?> GetCodeDetailByCode(string code);
+    
 }

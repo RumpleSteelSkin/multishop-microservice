@@ -7,6 +7,18 @@ public static class ApiRoutes
     private const string CatalogService = $"{OcelotBaseUrl}services/catalog/";
     private const string CommentService = $"{OcelotBaseUrl}services/comment/";
     private const string BasketService = $"{OcelotBaseUrl}services/basket/";
+    private const string DiscountService = $"{OcelotBaseUrl}services/discount/";
+
+    public static class Discounts
+    {
+        private const string Prefix = $"{DiscountService}{nameof(Discounts)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetCodeDetailByCode = $"{Prefix}{nameof(GetCodeDetailByCode)}";
+    }
 
     public static class Baskets
     {
