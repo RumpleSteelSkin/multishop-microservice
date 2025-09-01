@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MultiShop.WebUI.Controllers;
 
-public class DefaultController : Controller
+public class PaymentController : Controller
 {
     public ActionResult Index()
     {
