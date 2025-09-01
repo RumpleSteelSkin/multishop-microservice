@@ -13,6 +13,13 @@ public class Repository<T, TId>(OrderContext context) : IRepository<T, TId> wher
                throw new InvalidOperationException("No record found with the specified id");
     }
 
+    public async Task<ICollection<T>> GetAllByFilterAsync(Expression<Func<T, bool>> predicate,
+        CancellationToken cancellationToken = default)
+    {
+        return await context.Set<T>().Where(predicate).ToListAsync(cancellationToken) ??
+               throw new InvalidOperationException("Entities not found");
+    }
+
     public async Task<ICollection<T>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await context.Set<T>().ToListAsync(cancellationToken: cancellationToken);

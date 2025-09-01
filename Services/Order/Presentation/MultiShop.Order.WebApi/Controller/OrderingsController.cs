@@ -17,7 +17,13 @@ namespace MultiShop.Order.WebApi.Controller
             return Ok(await mediator.Send(new GetOrderingQuery()));
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("GetOrderingByUserId/{id}")]
+        public async Task<IActionResult> GetAll(string id)
+        {
+            return Ok(await mediator.Send(new GetOrderingByUserIdQuery { UserId = id }));
+        }
+
+        [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await mediator.Send(new GetOrderingByIdQuery { Id = id }));
@@ -40,6 +46,5 @@ namespace MultiShop.Order.WebApi.Controller
         {
             return Ok(await mediator.Send(new RemoveOrderingCommand(id)));
         }
-        
     }
 }

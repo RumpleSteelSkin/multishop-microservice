@@ -17,6 +17,7 @@ public static class ApiRoutes
         public const string Create = $"{Prefix}{nameof(Create)}";
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetOrderingByUserId = $"{Prefix}{nameof(GetOrderingByUserId)}";
     }
     public static class OrderDetails
     {
