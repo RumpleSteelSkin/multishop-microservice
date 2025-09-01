@@ -35,6 +35,10 @@
       <Folder Include="Areas\Admin\Data\" />
       <Folder Include="Areas\Admin\Models\" />
       <Folder Include="Areas\Admin\Pages\" />
+      <Folder Include="Areas\User\Data\" />
+      <Folder Include="Areas\User\Models\" />
+      <Folder Include="Areas\User\Pages\Shared\Components\" />
+      <Folder Include="Areas\User\Views\" />
       <Folder Include="Pages\Shared\Components\" />
     </ItemGroup>
 
