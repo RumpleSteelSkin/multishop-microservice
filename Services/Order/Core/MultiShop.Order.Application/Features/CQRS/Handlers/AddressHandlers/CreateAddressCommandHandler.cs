@@ -11,9 +11,17 @@ public class CreateAddressCommandHandler(IRepository<Address, int> repository)
         await repository.CreateAsync(new Address
         {
             City = command.City,
-            Detail = command.Detail,
+            Detail1 = command.Detail1,
             District = command.District,
-            UserId = command.UserId
+            Detail2 = command.Detail2,
+            Description = command.Description,
+            Country = command.Country,
+            Email = command.Email,
+            Name = command.Name,
+            Phone = command.Phone,
+            Surname = command.Surname,
+            UserId = command.UserId,
+            ZipCode = command.ZipCode
         });
     }
 }

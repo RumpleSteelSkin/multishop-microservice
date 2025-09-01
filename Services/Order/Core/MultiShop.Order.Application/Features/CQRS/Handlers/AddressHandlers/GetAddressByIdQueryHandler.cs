@@ -15,7 +15,15 @@ public class GetAddressByIdQueryHandler(IRepository<Address, int> repository)
             UserId = value.UserId,
             City = value.City,
             District = value.District,
-            Detail = value.Detail,
+            Detail1 = value.Detail1,
+            Detail2 = value.Detail2,
+            ZipCode = value.ZipCode,
+            Country = value.Country,
+            Email = value.Email,
+            Surname = value.Surname,
+            Description = value.Description,
+            Name = value.Name,
+            Phone = value.Phone,
         };
     }
 }

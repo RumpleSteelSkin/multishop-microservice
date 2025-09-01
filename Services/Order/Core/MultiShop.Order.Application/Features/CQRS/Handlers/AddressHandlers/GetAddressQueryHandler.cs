@@ -14,8 +14,16 @@ public class GetAddressQueryHandler(IRepository<Address, int> repository)
             Id = x.Id,
             City = x.City,
             District = x.District,
-            Detail = x.Detail,
-            UserId = x.UserId
+            Detail1 = x.Detail1,
+            UserId = x.UserId,
+            ZipCode = x.ZipCode,
+            Phone = x.Phone,
+            Name = x.Name,
+            Surname = x.Surname,
+            Country = x.Country,
+            Description = x.Description,
+            Email = x.Email,
+            Detail2 = x.Detail2,
         }).ToList();
     }
 }

@@ -1,9 +1,9 @@
-namespace MultiShop.Order.Domain.Entities;
+namespace MultiShop.DtoLayer.OrderDtos.AddressDtos;
 
-public class Address
+public class UpdateAddressDto
 {
-    public int Id { get; set; }
-    public string? UserId { get; set; }
+    public required string Id { get; set; }
+    public required string UserId { get; set; }
     public string? Name { get; set; }
     public string? Surname { get; set; }
     public string? Email { get; set; }

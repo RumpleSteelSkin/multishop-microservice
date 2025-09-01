@@ -8,7 +8,34 @@ public static class ApiRoutes
     private const string CommentService = $"{OcelotBaseUrl}services/comment/";
     private const string BasketService = $"{OcelotBaseUrl}services/basket/";
     private const string DiscountService = $"{OcelotBaseUrl}services/discount/";
-
+    private const string OrderService = $"{OcelotBaseUrl}services/order/";
+    public static class Orderings
+    {
+        private const string Prefix = $"{OrderService}{nameof(Orderings)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+    public static class OrderDetails
+    {
+        private const string Prefix = $"{OrderService}{nameof(OrderDetails)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+    public static class Addresses
+    {
+        private const string Prefix = $"{OrderService}{nameof(Addresses)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
     public static class Discounts
     {
         private const string Prefix = $"{DiscountService}{nameof(Discounts)}/";

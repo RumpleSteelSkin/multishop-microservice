@@ -12,7 +12,15 @@ public class UpdateAddressCommandHandler(IRepository<Address, int> repository)
         value.UserId = command.UserId;
         value.District = command.District;
         value.City = command.City;
-        value.Detail = command.Detail;
+        value.Detail1 = command.Detail1;
+        value.Detail2 = command.Detail2;
+        value.Email = command.Email;
+        value.Name = command.Name;
+        value.Phone = command.Phone;
+        value.ZipCode = command.ZipCode;
+        value.Description = command.Description;
+        value.Country = command.Country;
+        value.Surname = command.Surname;
         await repository.UpdateAsync(value);
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.BasketDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
-using MultiShop.DtoLayer.DiscountDto;
+using MultiShop.DtoLayer.DiscountDtos;
 using MultiShop.WebUI.Constant;
 using MultiShop.WebUI.Hooks;
 

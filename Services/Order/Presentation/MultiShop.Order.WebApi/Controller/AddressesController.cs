@@ -22,7 +22,7 @@ namespace MultiShop.Order.WebApi.Controller
             return Ok(await getAddressQueryHandler.Handle());
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("GetById/{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id)));

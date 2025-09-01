@@ -1,6 +1,8 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MultiShop.DtoLayer.ValidationDtos;
@@ -38,6 +40,19 @@ public class JsonService(
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
     }
+
+    public string? GetUserId()
+    {
+        if (httpContextAccessor.HttpContext is null)
+            return null;
+        var token = httpContextAccessor.HttpContext.Request.Cookies["access_token"];
+        if (string.IsNullOrWhiteSpace(token))
+            return null;
+        var handler = new JwtSecurityTokenHandler();
+        var sub = handler.ReadJwtToken(token).Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        return sub;
+    }
+
 
     private async Task<TokenResponseDto?> RefreshTokenAsync(string refreshToken)
     {
