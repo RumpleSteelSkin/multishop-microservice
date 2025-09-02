@@ -1,0 +1,67 @@
+@model ICollection<ResultSendBoxMessageDto>
+
+@{
+    ViewBag.Title = "SendBox";
+    Layout = "~/Areas/User/Views/UserLayout/Index.cshtml";
+    var count = 0;
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">SendBox</h4>
+                        <p class="card-description">
+                            My SendBox <code>@Model.Count</code>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Subject</th>
+                                    <th>Detail</th>
+                                    <th>Date</th>
+                                    <th>Is Read?</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th>@count</th>
+                                        <td>@item.Subject</td>
+                                        <td>@item.MessageDetail</td>
+                                        <td>@item.Date</td>
+                                        @if (item.IsRead)
+                                        {
+                                            <td><a asp-action="ChangeRead" asp-area="User" asp-controller="Message"
+                                                   asp-route-id="@item.Id" asp-route-read="false"
+                                                   class="btn btn-success">Unread</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a asp-action="ChangeRead" asp-area="User" asp-controller="Message"
+                                                   asp-route-id="@item.Id" asp-route-read="true"
+                                                   class="btn btn-warning">Read</a></td>
+                                        }
+                                        <td><a asp-action="DeleteMessage" asp-area="User" asp-controller="Message"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

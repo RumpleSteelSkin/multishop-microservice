@@ -9,6 +9,20 @@ public static class ApiRoutes
     private const string BasketService = $"{OcelotBaseUrl}services/basket/";
     private const string DiscountService = $"{OcelotBaseUrl}services/discount/";
     private const string OrderService = $"{OcelotBaseUrl}services/order/";
+    private const string MessageService = $"{OcelotBaseUrl}services/message/";
+
+    public static class UserMessage
+    {
+        private const string Prefix = $"{MessageService}{nameof(UserMessage)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetAllSendBoxMessage = $"{Prefix}{nameof(GetAllSendBoxMessage)}";
+        public const string GetAllInBoxMessage = $"{Prefix}{nameof(GetAllInBoxMessage)}";
+    }
+
     public static class Orderings
     {
         private const string Prefix = $"{OrderService}{nameof(Orderings)}/";
@@ -19,6 +33,7 @@ public static class ApiRoutes
         public const string Delete = $"{Prefix}{nameof(Delete)}";
         public const string GetOrderingByUserId = $"{Prefix}{nameof(GetOrderingByUserId)}";
     }
+
     public static class OrderDetails
     {
         private const string Prefix = $"{OrderService}{nameof(OrderDetails)}/";
@@ -28,6 +43,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
+
     public static class Addresses
     {
         private const string Prefix = $"{OrderService}{nameof(Addresses)}/";
@@ -37,6 +53,7 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
     }
+
     public static class Discounts
     {
         private const string Prefix = $"{DiscountService}{nameof(Discounts)}/";
