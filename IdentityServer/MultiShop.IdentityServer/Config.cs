@@ -19,6 +19,8 @@ public static class Config
         new("ResourcePayment") { Scopes = { "PaymentFullPermission" } },
         new("ResourceImages") { Scopes = { "ImagesFullPermission" } },
         new("ResourceOcelot") { Scopes = { "OcelotFullPermission" } },
+        new("ResourceMessage")
+            { Scopes = { "MessageFullPermission", "MessageReadPermission", "MessageHalfPermission" } },
         new(IdentityServerConstants.LocalApi.ScopeName)
     ];
 
@@ -45,6 +47,9 @@ public static class Config
         new("CommentFullPermission", "Full access to Comment"),
         new("CommentReadPermission", "Read access to Comment"),
         new("CommentHalfPermission", "Half access to Comment"),
+        new("MessageFullPermission", "Full access to Message"),
+        new("MessageHalfPermission", "Half access to Message"),
+        new("MessageReadPermission", "Read access to Message"),
         new(IdentityServerConstants.LocalApi.ScopeName)
     ];
 
@@ -58,7 +63,7 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogReadPermission", "OcelotFullPermission", "CommentReadPermission","DiscountReadPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentReadPermission", "DiscountReadPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
             }
         },
@@ -70,7 +75,8 @@ public static class Config
             ClientSecrets = { new Secret("multishopsecret".Sha256()) },
             AllowedScopes =
             {
-                "CatalogReadPermission", "OcelotFullPermission", "CommentHalfPermission", "BasketFullPermission","DiscountHalfPermission",
+                "CatalogReadPermission", "OcelotFullPermission", "CommentHalfPermission", "BasketFullPermission",
+                "DiscountHalfPermission", "MessageReadPermission", "MessageHalfPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.Profile,
@@ -94,6 +100,7 @@ public static class Config
                 "CommentFullPermission",
                 "ImagesFullPermission",
                 "PaymentFullPermission",
+                "MessageFullPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.Profile,
