@@ -30,4 +30,9 @@ public class CargoCustomerManager(ICargoCustomerDal dal) : ICargoCustomerService
     {
         return dal.GetAll();
     }
+    
+    public ICollection<CargoCustomer> GetAllByCustomerId(string customerId)
+    {
+        return dal.GetAllByCustomerId(customerId);
+    }
 }

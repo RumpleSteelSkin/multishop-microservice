@@ -1,0 +1,51 @@
+@model ICollection<GetAllCargoCustomerDto>?
+
+@{
+    ViewBag.Title = "Customer Addresses";
+    ViewBag.v1 = "Home";
+    ViewBag.v2 = "Users";
+    ViewBag.v3 = "Customer Address List";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>SurName</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>District</th>
+                            <th>City</th>
+                            <th>Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@item.Name</td>
+                                <td>@item.SurName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                <td>@item.District</td>
+                                <td>@item.City</td>
+                                <td>@item.Address</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -10,6 +10,48 @@ public static class ApiRoutes
     private const string DiscountService = $"{OcelotBaseUrl}services/discount/";
     private const string OrderService = $"{OcelotBaseUrl}services/order/";
     private const string MessageService = $"{OcelotBaseUrl}services/message/";
+    private const string CargoService = $"{OcelotBaseUrl}services/cargo/";
+
+    public static class CargoCompanies
+    {
+        private const string Prefix = $"{CargoService}{nameof(CargoCompanies)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+
+    public static class CargoDetails
+    {
+        private const string Prefix = $"{CargoService}{nameof(CargoDetails)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
+
+    public static class CargoCustomers
+    {
+        private const string Prefix = $"{CargoService}{nameof(CargoCustomers)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetCargoCustomerById = $"{Prefix}{nameof(GetCargoCustomerById)}";
+    }
+
+    public static class CargoOperations
+    {
+        private const string Prefix = $"{CargoService}{nameof(CargoCompanies)}/";
+        public const string GetAll = $"{Prefix}{nameof(GetAll)}";
+        public const string GetById = $"{Prefix}{nameof(GetById)}";
+        public const string Create = $"{Prefix}{nameof(Create)}";
+        public const string Update = $"{Prefix}{nameof(Update)}";
+        public const string Delete = $"{Prefix}{nameof(Delete)}";
+    }
 
     public static class UserMessage
     {
@@ -80,6 +122,7 @@ public static class ApiRoutes
     {
         private const string Prefix = $"{IdentityBaseUrl}api/{nameof(Users)}/";
         public const string GetUserInfo = $"{Prefix}{nameof(GetUserInfo)}";
+        public const string GetAllUsers = $"{Prefix}{nameof(GetAllUsers)}";
     }
 
     public static class Registers

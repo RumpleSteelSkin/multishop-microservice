@@ -1,0 +1,10 @@
+namespace MultiShop.DtoLayer.CargoDtos.CargoDetailDtos;
+
+public class GetAllCargoDetailDto
+{
+    public int Id { get; set; }
+    public string? SenderCustomer { get; set; }
+    public string? ReceiverCustomer { get; set; }
+    public int Barcode { get; set; }
+    public int CargoCompanyId { get; set; }
+}

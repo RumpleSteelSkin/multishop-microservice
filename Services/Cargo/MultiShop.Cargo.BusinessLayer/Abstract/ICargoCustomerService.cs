@@ -2,4 +2,7 @@ using MultiShop.Cargo.EntityLayer.Concrete;
 
 namespace MultiShop.Cargo.BusinessLayer.Abstract;
 
-public interface ICargoCustomerService : IGenericService<CargoCustomer>;
+public interface ICargoCustomerService : IGenericService<CargoCustomer>
+{
+    ICollection<CargoCustomer> GetAllByCustomerId(string customerId);
+}

@@ -70,4 +70,10 @@ public class CargoCustomersController(ICargoCustomerService cargoCustomerService
         cargoCustomerService.Update(cargoCustomer);
         return Ok("Cargo customer updated");
     }
+
+    [HttpGet("GetCargoCustomerById/{id}")]
+    public IActionResult GetCargoCustomerById(string id)
+    {
+        return Ok(cargoCustomerService.GetAllByCustomerId(id));
+    }
 }
