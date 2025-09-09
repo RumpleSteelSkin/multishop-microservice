@@ -6,6 +6,7 @@ public interface IBrandService
 {
     Task<ICollection<ResultBrandDto>> GetAllAsync();
     Task<GetByIdBrandDto> GetByIdAsync(string id);
+    Task<long> GetCountAsync();
     Task CreateAsync(CreateBrandDto createBrandDto);
     Task UpdateAsync(UpdateBrandDto updateBrandDto);
     Task DeleteAsync(string id);

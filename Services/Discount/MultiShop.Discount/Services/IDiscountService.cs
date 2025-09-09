@@ -10,5 +10,6 @@ public interface IDiscountService
     Task Delete(int id);
     Task<GetByIdCouponDto> GetById(int id);
     Task<ResultCouponDto?> GetCodeDetailByCode(string code);
-    
+    Task<int> GetCount();
+
 }

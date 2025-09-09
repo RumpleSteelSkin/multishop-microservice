@@ -16,6 +16,11 @@ public class CategoryService(IMapper mapper, IDatabaseSettings settings, IMongoC
         return mapper.Map<ICollection<ResultCategoryDto>>(await _collection.Find(_ => true).ToListAsync());
     }
 
+    public async Task<long> GetCountAsync()
+    {
+        return await _collection.CountDocumentsAsync(FilterDefinition<Category>.Empty);
+    }
+
     public async Task<GetByIdCategoryDto> GetByIdAsync(string id)
     {
         return mapper.Map<GetByIdCategoryDto>(await _collection.Find(c => c.Id == id).FirstOrDefaultAsync());

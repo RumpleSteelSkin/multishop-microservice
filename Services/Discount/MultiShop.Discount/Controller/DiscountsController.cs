@@ -17,6 +17,13 @@ namespace MultiShop.Discount.Controller
             return Ok(await discountService.GetAll());
         }
 
+        [HttpGet("GetCount")]
+        [Authorize(Policy = "DiscountHalf")]
+        public async Task<IActionResult> GetCount()
+        {
+            return Ok(await discountService.GetCount());
+        }
+
         [HttpGet("GetById/{id:int}")]
         [Authorize(Policy = "DiscountHalf")]
         public async Task<IActionResult> GetById(int id)

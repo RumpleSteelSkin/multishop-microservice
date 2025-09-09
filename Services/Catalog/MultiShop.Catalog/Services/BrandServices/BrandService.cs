@@ -21,6 +21,11 @@ public class BrandService(IMapper mapper, IDatabaseSettings settings, IMongoClie
         return mapper.Map<GetByIdBrandDto>(await _collection.Find(c => c.Id == id).FirstOrDefaultAsync());
     }
 
+    public async Task<long> GetCountAsync()
+    {
+        return await _collection.CountDocumentsAsync(FilterDefinition<Brand>.Empty);
+    }
+
     public async Task CreateAsync(CreateBrandDto createBrandDto)
     {
         await _collection.InsertOneAsync(mapper.Map<Brand>(createBrandDto));

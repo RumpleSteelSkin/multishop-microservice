@@ -59,4 +59,18 @@ public class CommentsController(CommentContext context) : ControllerBase
     {
         return Ok(await context.UserComments.Where(x => x.ProductId == id).ToListAsync());
     }
+
+    [HttpGet("GetActiveCommentCount")]
+    [Authorize(Policy = "CommentRead")]
+    public async Task<IActionResult> GetActiveCommentCount()
+    {
+        return Ok(await context.UserComments.CountAsync(x => x.Status == true));
+    }
+
+    [HttpGet("GetPassiveCommentCount")]
+    [Authorize(Policy = "CommentRead")]
+    public async Task<IActionResult> GetPassiveCommentCount()
+    {
+        return Ok(await context.UserComments.CountAsync(x => x.Status == false));
+    }
 }

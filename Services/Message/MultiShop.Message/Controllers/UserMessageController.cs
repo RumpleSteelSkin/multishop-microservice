@@ -37,6 +37,13 @@ public class UserMessageController(IUserMessageService userMessageService) : Con
     {
         return Ok(await userMessageService.GetByIdMessageAsync(id));
     }
+    
+    [HttpGet("GetCount")]
+    [Authorize(Policy = "MessageRead")]
+    public async Task<IActionResult> GetCount()
+    {
+        return Ok(await userMessageService.GetCount());
+    }
 
     [HttpPost("Create")]
     [Authorize(Policy = "MessageHalf")]

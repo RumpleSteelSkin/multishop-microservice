@@ -63,6 +63,7 @@ public static class ApiRoutes
         public const string Delete = $"{Prefix}{nameof(Delete)}";
         public const string GetAllSendBoxMessage = $"{Prefix}{nameof(GetAllSendBoxMessage)}";
         public const string GetAllInBoxMessage = $"{Prefix}{nameof(GetAllInBoxMessage)}";
+        public const string GetCount = $"{Prefix}{nameof(GetCount)}";
     }
 
     public static class Orderings
@@ -105,6 +106,8 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
         public const string GetCodeDetailByCode = $"{Prefix}{nameof(GetCodeDetailByCode)}";
+        public const string GetCount = $"{Prefix}{nameof(GetCount)}";
+        
     }
 
     public static class Baskets
@@ -123,6 +126,7 @@ public static class ApiRoutes
         private const string Prefix = $"{IdentityBaseUrl}api/{nameof(Users)}/";
         public const string GetUserInfo = $"{Prefix}{nameof(GetUserInfo)}";
         public const string GetAllUsers = $"{Prefix}{nameof(GetAllUsers)}";
+        public const string GetUserCount = $"{Prefix}{nameof(GetUserCount)}";
     }
 
     public static class Registers
@@ -151,6 +155,7 @@ public static class ApiRoutes
         public const string Create = $"{Prefix}{nameof(Create)}";
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetCount = $"{Prefix}{nameof(GetCount)}";
     }
 
     public static class Contacts
@@ -222,6 +227,8 @@ public static class ApiRoutes
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
         public const string GetAllByProductId = $"{Prefix}{nameof(GetAllByProductId)}";
+        public const string GetActiveCommentCount = $"{Prefix}{nameof(GetActiveCommentCount)}";
+        public const string GetPassiveCommentCount = $"{Prefix}{nameof(GetPassiveCommentCount)}";
     }
 
     public static class Brands
@@ -232,6 +239,7 @@ public static class ApiRoutes
         public const string Create = $"{Prefix}{nameof(Create)}";
         public const string Update = $"{Prefix}{nameof(Update)}";
         public const string Delete = $"{Prefix}{nameof(Delete)}";
+        public const string GetCount = $"{Prefix}{nameof(GetCount)}";
     }
 
     public static class Products
@@ -245,5 +253,9 @@ public static class ApiRoutes
         public const string GetAllWithCategory = $"{Prefix}{nameof(GetAllWithCategory)}";
         public const string GetCountByCategoryId = $"{Prefix}{nameof(GetCountByCategoryId)}";
         public const string GetAllWithCategoryByCategoryId = $"{Prefix}{nameof(GetAllWithCategoryByCategoryId)}";
+        public const string GetCount = $"{Prefix}{nameof(GetCount)}";
+        public const string GetProductAvgPrice = $"{Prefix}{nameof(GetProductAvgPrice)}";
+        public const string GetMaxPriceProductName = $"{Prefix}{nameof(GetMaxPriceProductName)}";
+        public const string GetMinPriceProductName = $"{Prefix}{nameof(GetMinPriceProductName)}";
     }
 }

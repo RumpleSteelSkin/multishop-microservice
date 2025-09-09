@@ -11,4 +11,5 @@ public interface IUserMessageService
     Task UpdateMessageAsync(UpdateMessageDto updateMessageDto);
     Task DeleteMessageAsync(int id);
     Task CreateMessageAsync(CreateMessageDto createMessageDto);
+    Task <int> GetCount();
 }

@@ -11,6 +11,7 @@ public interface IProductService
     Task<ICollection<ResultProductDto>> GetAllAsync(Expression<Func<Product, bool>> predicate);
     Task<ICollection<ResultProductsWithCategoryDto>> GetAllWithCategoryAsync();
     Task<ICollection<ResultProductsWithCategoryDto>> GetAllWithCategoryByCategoryIdAsync(string id);
+    Task<long> GetCountAsync();
     Task<GetByIdProductDto> GetByIdAsync(string id);
     Task CreateAsync(CreateProductDto createProductDto);
     Task UpdateAsync(UpdateProductDto updateProductDto);

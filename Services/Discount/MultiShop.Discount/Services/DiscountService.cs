@@ -43,6 +43,12 @@ public class DiscountService(DapperContext context) : IDiscountService
     public async Task<ResultCouponDto?> GetCodeDetailByCode(string code)
     {
         using var conn = context.CreateConnection();
-        return await conn.QueryFirstAsync<ResultCouponDto>("SELECT * FROM Coupons WHERE Code = @Code;", new { code }) ?? null;
+        return await conn.QueryFirstAsync<ResultCouponDto>("SELECT * FROM Coupons WHERE Code = @Code;", new { code });
+    }
+
+    public async Task<int> GetCount()
+    {
+        using var conn = context.CreateConnection();
+        return await conn.QueryFirstAsync<int>("SELECT COUNT(*) FROM Coupons");
     }
 }

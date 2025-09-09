@@ -44,5 +44,11 @@ namespace MultiShop.IdentityServer.Controller
                 Username = user.UserName
             }).ToListAsync());
         }
+
+        [HttpGet("GetUserCount")]
+        public async Task<IActionResult> GetUserCount()
+        {
+            return Ok(await userManager.Users.CountAsync());
+        }
     }
 }

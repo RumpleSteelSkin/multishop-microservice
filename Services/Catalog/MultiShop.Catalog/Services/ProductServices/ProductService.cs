@@ -19,6 +19,12 @@ public class ProductService(IMapper mapper, IDatabaseSettings settings, IMongoCl
     {
         return mapper.Map<ICollection<ResultProductDto>>(await _productCollection.Find(_ => true).ToListAsync());
     }
+    
+    public async Task<long> GetCountAsync()
+    {
+        return await _productCollection.CountDocumentsAsync(FilterDefinition<Product>.Empty);
+    }
+
 
     public async Task<ICollection<ResultProductDto>> GetAllAsync(Expression<Func<Product, bool>> predicate)
     {

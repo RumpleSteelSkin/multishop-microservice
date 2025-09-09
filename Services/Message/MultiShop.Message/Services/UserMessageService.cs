@@ -52,4 +52,9 @@ public class UserMessageService(MessageContext context, IMapper mapper) : IUserM
         await context.Set<UserMessage>().AddAsync(mapper.Map<UserMessage>(createMessageDto));
         await context.SaveChangesAsync();
     }
+
+    public async Task<int> GetCount()
+    {
+        return await context.Set<UserMessage>().CountAsync();
+    }
 }

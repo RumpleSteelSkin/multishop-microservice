@@ -5,6 +5,7 @@ namespace MultiShop.Catalog.Services.CategoryServices;
 public interface ICategoryService
 {
     Task<ICollection<ResultCategoryDto>> GetAllAsync();
+    Task<long> GetCountAsync();
     Task<GetByIdCategoryDto> GetByIdAsync(string id);
     Task CreateAsync(CreateCategoryDto createCategoryDto);
     Task UpdateAsync(UpdateCategoryDto updateCategoryDto);
