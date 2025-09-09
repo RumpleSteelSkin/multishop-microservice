@@ -1,5 +1,42 @@
-  <header class="main-header dark-bg">
+  
+<script src="~/lib/microsoft/signalr/dist/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 
+<script type="text/javascript">
+
+  const constats = [
+    {receive: "CommentCount", element: "#CommentCount"},
+    {receive: "MessageCount", element: "#MessageCount"},
+
+  ];
+
+  $(document).ready(() => {
+    var connection = new signalR.HubConnectionBuilder()
+      .withUrl("/signalrhub")
+      .build();
+    $("#connstatus").text(connection.state);
+    connection.on("ReceiveNotifies", (data) => {
+      constats.forEach(stat => {
+        if (data.hasOwnProperty(stat.receive)) {
+          $(stat.element).text(data[stat.receive]);
+        }
+      });
+    });
+    connection.start().then(() => {
+      $("#connstatus").text(connection.state);
+      setInterval(() => {
+        connection.invoke("SendNotifies").catch(err => console.error(err));
+      }, 1000);
+    }).catch((error) => {
+      console.error("SignalR connection failed:", error);
+    });
+  });
+</script>
+
+
+
+
+<header class="main-header dark-bg">
     <!-- Logo -->
     <a href="~/index.html" class="logo dark-bg">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -27,7 +64,8 @@
         <ul class="nav navbar-nav">
           <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
                 class="icon-envelope"></i>
-              <div class="notify"><span class="heartbit"></span> <span class="point"></span></div>
+              <span class="badge badge-danger" style="display:inline-block; vertical-align:top;" id="MessageCount"></span>
+              <span class="point" style="display:inline-block; vertical-align:top;"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
@@ -67,7 +105,8 @@
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
                 class="icon-megaphone"></i>
-              <div class="notify"><span class="heartbit"></span> <span class="point"></span></div>
+              <span class="badge badge-danger" style="display:inline-block; vertical-align:top;" id="CommentCount"></span>
+              <span class="point" style="display:inline-block; vertical-align:top;"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">Notifications</li>

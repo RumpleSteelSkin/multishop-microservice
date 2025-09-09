@@ -28,6 +28,7 @@
       <AdditionalFiles Include="Areas\Admin\Views\Contacts\Index.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Contacts\Update.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Products\Index.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Statistics\Index.cshtml" />
       <AdditionalFiles Include="Views\ShoppingCart\Index.cshtml" />
     </ItemGroup>
 

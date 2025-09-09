@@ -64,6 +64,7 @@ public static class ApiRoutes
         public const string GetAllSendBoxMessage = $"{Prefix}{nameof(GetAllSendBoxMessage)}";
         public const string GetAllInBoxMessage = $"{Prefix}{nameof(GetAllInBoxMessage)}";
         public const string GetCount = $"{Prefix}{nameof(GetCount)}";
+        public const string GetCountByReceiverId = $"{Prefix}{nameof(GetCountByReceiverId)}";
     }
 
     public static class Orderings
@@ -107,7 +108,6 @@ public static class ApiRoutes
         public const string Delete = $"{Prefix}{nameof(Delete)}";
         public const string GetCodeDetailByCode = $"{Prefix}{nameof(GetCodeDetailByCode)}";
         public const string GetCount = $"{Prefix}{nameof(GetCount)}";
-        
     }
 
     public static class Baskets

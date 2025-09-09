@@ -12,4 +12,5 @@ public interface IUserMessageService
     Task DeleteMessageAsync(int id);
     Task CreateMessageAsync(CreateMessageDto createMessageDto);
     Task <int> GetCount();
+    Task <int> GetCountByReceiverId(string id);
 }

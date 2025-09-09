@@ -3,63 +3,62 @@ using Microsoft.AspNetCore.Mvc;
 using MultiShop.Discount.Dtos;
 using MultiShop.Discount.Services;
 
-namespace MultiShop.Discount.Controller
+namespace MultiShop.Discount.Controller;
+
+[Authorize]
+[Route("api/[controller]")]
+[ApiController]
+public class DiscountsController(IDiscountService discountService) : ControllerBase
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DiscountsController(IDiscountService discountService) : ControllerBase
+    [HttpGet("GetAll")]
+    [Authorize(Policy = "DiscountHalf")]
+    public async Task<IActionResult> GetAll()
     {
-        [HttpGet("GetAll")]
-        [Authorize(Policy = "DiscountHalf")]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(await discountService.GetAll());
-        }
+        return Ok(await discountService.GetAll());
+    }
 
-        [HttpGet("GetCount")]
-        [Authorize(Policy = "DiscountHalf")]
-        public async Task<IActionResult> GetCount()
-        {
-            return Ok(await discountService.GetCount());
-        }
+    [HttpGet("GetCount")]
+    [Authorize(Policy = "DiscountHalf")]
+    public async Task<IActionResult> GetCount()
+    {
+        return Ok(await discountService.GetCount());
+    }
 
-        [HttpGet("GetById/{id:int}")]
-        [Authorize(Policy = "DiscountHalf")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            return Ok(await discountService.GetById(id));
-        }
+    [HttpGet("GetById/{id:int}")]
+    [Authorize(Policy = "DiscountHalf")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        return Ok(await discountService.GetById(id));
+    }
 
-        [HttpGet("GetCodeDetailByCode/{code}")]
-        [Authorize(Policy = "DiscountHalf")]
-        public async Task<IActionResult> GetCodeDetailByCode(string code)
-        {
-            return Ok(await discountService.GetCodeDetailByCode(code));
-        }
+    [HttpGet("GetCodeDetailByCode/{code}")]
+    [Authorize(Policy = "DiscountHalf")]
+    public async Task<IActionResult> GetCodeDetailByCode(string code)
+    {
+        return Ok(await discountService.GetCodeDetailByCode(code));
+    }
 
-        [HttpPost("Create")]
-        [Authorize(Policy = "DiscountWrite")]
-        public async Task<IActionResult> Create(CreateCouponDto createCouponDto)
-        {
-            await discountService.Create(createCouponDto);
-            return Ok($"Discount {createCouponDto.Code} was created successfully");
-        }
+    [HttpPost("Create")]
+    [Authorize(Policy = "DiscountWrite")]
+    public async Task<IActionResult> Create(CreateCouponDto createCouponDto)
+    {
+        await discountService.Create(createCouponDto);
+        return Ok($"Discount {createCouponDto.Code} was created successfully");
+    }
 
-        [HttpPut("Update")]
-        [Authorize(Policy = "DiscountWrite")]
-        public async Task<IActionResult> Update(UpdateCouponDto updateCouponDto)
-        {
-            await discountService.Update(updateCouponDto);
-            return Ok($"Discount {updateCouponDto.Code} was updated successfully");
-        }
+    [HttpPut("Update")]
+    [Authorize(Policy = "DiscountWrite")]
+    public async Task<IActionResult> Update(UpdateCouponDto updateCouponDto)
+    {
+        await discountService.Update(updateCouponDto);
+        return Ok($"Discount {updateCouponDto.Code} was updated successfully");
+    }
 
-        [HttpDelete("Delete/{id:int}")]
-        [Authorize(Policy = "DiscountWrite")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await discountService.Delete(id);
-            return Ok($"Discount {id} was deleted successfully");
-        }
+    [HttpDelete("Delete/{id:int}")]
+    [Authorize(Policy = "DiscountWrite")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await discountService.Delete(id);
+        return Ok($"Discount {id} was deleted successfully");
     }
 }

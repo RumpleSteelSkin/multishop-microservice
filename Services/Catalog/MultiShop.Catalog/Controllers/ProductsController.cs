@@ -27,17 +27,17 @@ public class ProductsController(IProductService productService) : ControllerBase
     {
         return Ok(productService.GetAllAsync().Result.Select(x => x.Price).Average());
     }
-    
+
     [HttpGet("GetMaxPriceProductName")]
-    public IActionResult GetMaxPriceProductName()
+    public async Task<IActionResult> GetMaxPriceProductName()
     {
-        return Ok(productService.GetAllAsync().Result.MaxBy(x=>x.Price)?.Name);
+        return new JsonResult((await productService.GetAllAsync()).MaxBy(x => x.Price)?.Name ?? string.Empty);
     }
-    
+
     [HttpGet("GetMinPriceProductName")]
-    public IActionResult GetMinPriceProductName()
+    public async Task<IActionResult> GetMinPriceProductName()
     {
-        return Ok(productService.GetAllAsync().Result.MinBy(x=>x.Price)?.Name);
+        return new JsonResult((await productService.GetAllAsync()).MinBy(x => x.Price)?.Name ?? string.Empty);
     }
 
     [HttpGet("GetAllWithCategory")]

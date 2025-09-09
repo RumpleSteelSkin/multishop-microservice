@@ -1,0 +1,172 @@
+@{
+  ViewBag.Title = "General Statistics";
+  ViewBag.v1 = "Home";
+  ViewBag.v2 = "Statistics";
+  ViewBag.v3 = "Statistic Cards";
+  Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<script src="~/lib/microsoft/signalr/dist/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+  const constats = [
+    {receive: "CategoryGetCount", element: "#CategoryGetCount"},
+    {receive: "BrandGetCount", element: "#BrandGetCount"},
+    {receive: "ProductGetCount", element: "#ProductGetCount"},
+    {receive: "ProductGetMaxPriceProductName", element: "#ProductGetMaxPriceProductName"},
+    {receive: "ProductGetMinPriceProductName", element: "#ProductGetMinPriceProductName"},
+    {receive: "DiscountGetCount", element: "#DiscountGetCount"},
+    {receive: "UsersGetCount", element: "#UsersGetCount"},
+    {receive: "CommentGetActiveCommentCount", element: "#CommentGetActiveCommentCount"},
+    {receive: "CommentGetPassiveCommentCount", element: "#CommentGetPassiveCommentCount"},
+    {receive: "UserMessageGetCount", element: "#UserMessageGetCount"},
+    {receive: "ProductGetAvgPrice", element: "#ProductGetAvgPrice"},
+  ];
+
+  $(document).ready(() => {
+    var connection = new signalR.HubConnectionBuilder()
+      .withUrl("/signalrhub")
+      .build();
+    $("#connstatus").text(connection.state);
+    connection.on("ReceiveStatistics", (data) => {
+      constats.forEach(stat => {
+        if (data.hasOwnProperty(stat.receive)) {
+          $(stat.element).text(data[stat.receive]);
+        }
+      });
+      if (data.hasOwnProperty("CommentGetActiveCommentCount") &&
+        data.hasOwnProperty("CommentGetPassiveCommentCount")) {
+        let total = data["CommentGetActiveCommentCount"] + data["CommentGetPassiveCommentCount"];
+        $("#CommentGetTotalCount").text(total);
+      }
+    });
+
+    connection.start().then(() => {
+      $("#connstatus").text(connection.state);
+      setInterval(() => {
+        connection.invoke("SendStatistics").catch(err => console.error(err));
+      }, 1000);
+    }).catch((error) => {
+      console.error("SignalR connection failed:", error);
+    });
+  });
+</script>
+
+<section class="content container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box">
+        <div class="media-icon pull-left"><i class="icon-bargraph"></i></div>
+        <div class="media-info">
+          <h5>Category Count</h5>
+          <h3 id="CategoryGetCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-sea">
+        <div class="media-icon pull-left"><i class="icon-wallet"></i></div>
+        <div class="media-info">
+          <h5>Brand Count</h5>
+          <h3 id="BrandGetCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-blue">
+        <div class="media-icon pull-left"><i class="icon-basket"></i></div>
+        <div class="media-info">
+          <h5>Product Count</h5>
+          <h3 id="ProductGetCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-green">
+        <div class="media-icon pull-left"><i class="icon-layers"></i></div>
+        <div class="media-info">
+          <h5>Discount Count</h5>
+          <h3 id="DiscountGetCount"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box">
+        <div class="media-icon pull-left"><i class="icon-bargraph"></i></div>
+        <div class="media-info">
+          <h5>Max Price Name</h5>
+          <h3 id="ProductGetMaxPriceProductName"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-sea">
+        <div class="media-icon pull-left"><i class="icon-wallet"></i></div>
+        <div class="media-info">
+          <h5>Min Price Name</h5>
+          <h3 id="ProductGetMinPriceProductName"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-blue">
+        <div class="media-icon pull-left"><i class="icon-basket"></i></div>
+        <div class="media-info">
+          <h5>Average Product Price</h5>
+          <h3 id="ProductGetAvgPrice"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-green">
+        <div class="media-icon pull-left"><i class="icon-layers"></i></div>
+        <div class="media-info">
+          <h5>User Count</h5>
+          <h3 id="UsersGetCount"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box">
+        <div class="media-icon pull-left"><i class="icon-bargraph"></i></div>
+        <div class="media-info">
+          <h5>Message Count</h5>
+          <h3 id="UserMessageGetCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-sea">
+        <div class="media-icon pull-left"><i class="icon-wallet"></i></div>
+        <div class="media-info">
+          <h5>Active Comment</h5>
+          <h3 id="CommentGetActiveCommentCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-blue">
+        <div class="media-icon pull-left"><i class="icon-basket"></i></div>
+        <div class="media-info">
+          <h5>Passive Comment</h5>
+          <h3 id="CommentGetPassiveCommentCount"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+      <div class="media-box bg-green">
+        <div class="media-icon pull-left"><i class="icon-layers"></i></div>
+        <div class="media-info">
+          <h5>Comment Count</h5>
+          <h3 id="CommentGetTotalCount"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

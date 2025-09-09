@@ -37,6 +37,13 @@ public class UserMessageController(IUserMessageService userMessageService) : Con
     {
         return Ok(await userMessageService.GetByIdMessageAsync(id));
     }
+
+    [HttpGet("GetCountByReceiverId/{id}")]
+    [Authorize(Policy = "MessageRead")]
+    public async Task<IActionResult> GetCountByReceiverId(string id)
+    {
+        return Ok(await userMessageService.GetCountByReceiverId(id));
+    }
     
     [HttpGet("GetCount")]
     [Authorize(Policy = "MessageRead")]

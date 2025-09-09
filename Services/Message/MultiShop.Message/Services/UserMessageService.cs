@@ -57,4 +57,9 @@ public class UserMessageService(MessageContext context, IMapper mapper) : IUserM
     {
         return await context.Set<UserMessage>().CountAsync();
     }
+
+    public async Task<int> GetCountByReceiverId(string id)
+    {
+        return await context.Set<UserMessage>().CountAsync(x => x.ReceiverId == id);
+    }
 }

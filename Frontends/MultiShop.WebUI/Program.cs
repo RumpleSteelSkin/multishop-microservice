@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MultiShop.WebUI.Filters;
 using MultiShop.WebUI.Hooks;
+using MultiShop.WebUI.Hubs;
 using MultiShop.WebUI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,12 @@ builder.Services.AddAuthentication("cookie")
 
 builder.Services.AddControllersWithViews(options => { options.Filters.Add<RedirectOnUnauthorizedFilter>(); });
 
+#region SignalR Services
+
+builder.Services.AddSignalR();
+
+#endregion
+
 var app = builder.Build();
 
 #region Exception & Security
@@ -36,6 +43,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+
 
 #endregion
 
@@ -65,5 +74,7 @@ app.MapControllerRoute(
 );
 
 #endregion
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
