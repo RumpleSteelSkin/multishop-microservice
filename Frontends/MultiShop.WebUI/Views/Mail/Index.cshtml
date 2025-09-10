@@ -1,0 +1,35 @@
+@model MultiShop.WebUI.Models.MailRequest
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="">
+<head>
+    <title>Mail Sender</title>
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <br/>
+    <div class="alert alert-success"><h3>Mail Send Page</h3></div>
+    <form method="post">
+        <label>To Name</label>
+        <input type="text" asp-for="ToName" class="form-control"/>
+        <br/>
+        <label>To Mail</label>
+        <input type="email" asp-for="ToMail" class="form-control"/>
+        <br/>
+        <label>Subject</label>
+        <input type="text" asp-for="Subject" class="form-control"/>
+        <br/>
+        <label>Body</label>
+        <textarea rows="5" type="text" asp-for="Body" class="form-control"></textarea>
+        <br/>
+        <button class="btn btn-primary">Send</button>
+    </form>
+</div>
+</body>
+</html>
