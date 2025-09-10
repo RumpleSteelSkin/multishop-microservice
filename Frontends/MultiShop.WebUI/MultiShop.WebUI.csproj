@@ -10,9 +10,11 @@
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\ShoppingCart\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Information\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="MailKit" Version="4.13.0" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
     </ItemGroup>
@@ -29,6 +31,9 @@
       <AdditionalFiles Include="Areas\Admin\Views\Contacts\Update.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Products\Index.cshtml" />
       <AdditionalFiles Include="Areas\Admin\Views\Statistics\Index.cshtml" />
+      <AdditionalFiles Include="Resources\Views\Information\Index.en.resx" />
+      <AdditionalFiles Include="Resources\Views\Information\Index.fr.resx" />
+      <AdditionalFiles Include="Views\Information\Index.cshtml" />
       <AdditionalFiles Include="Views\ShoppingCart\Index.cshtml" />
     </ItemGroup>
 
@@ -41,10 +46,51 @@
       <Folder Include="Areas\User\Pages\Shared\Components\" />
       <Folder Include="Areas\User\Views\" />
       <Folder Include="Pages\Shared\Components\" />
+      <Folder Include="Resources\Views\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\MultiShop.DtoLayer\MultiShop.DtoLayer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Views\Resources\Information\Index.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\Resources\Information\Index.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Information\Index.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Information\Index.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Information\Index.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Information\Index.fr.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\Resources\Information\Index.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.en.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Resources\Information\Index.fr.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.fr.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

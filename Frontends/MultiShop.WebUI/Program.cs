@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MultiShop.WebUI.Filters;
 using MultiShop.WebUI.Hooks;
@@ -34,6 +35,10 @@ builder.Services.AddSignalR();
 
 #endregion
 
+builder.Services.AddLocalization(opt => opt.ResourcesPath = "Resources");
+builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
+
 var app = builder.Build();
 
 #region Exception & Security
@@ -43,8 +48,6 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
-
 
 #endregion
 
@@ -74,6 +77,10 @@ app.MapControllerRoute(
 );
 
 #endregion
+
+var supportedCultures = new[] { "en", "fr", "tr" };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[2]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+app.UseRequestLocalization(localizationOptions);
 
 app.MapHub<SignalRHub>("/signalrhub");
 
