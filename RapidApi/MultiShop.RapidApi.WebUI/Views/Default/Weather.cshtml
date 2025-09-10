@@ -1,0 +1,17 @@
+@model RootObject
+
+@{
+    ViewBag.Title = "title";
+    Layout = null;
+}
+<head>
+    <title>Weather</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-image: url(@Model.data.bg_image); background-repeat: no-repeat;">
+<div class="container">
+    <br/>
+    <br/>
+    <h3>Ankara Weather:@Model.data.temp</h3>
+</div>
+</body>
