@@ -10,8 +10,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 <script type="text/javascript">
-
-  const constats = [
+  const consts = [
     {receive: "CategoryGetCount", element: "#CategoryGetCount"},
     {receive: "BrandGetCount", element: "#BrandGetCount"},
     {receive: "ProductGetCount", element: "#ProductGetCount"},
@@ -31,7 +30,7 @@
       .build();
     $("#connstatus").text(connection.state);
     connection.on("ReceiveStatistics", (data) => {
-      constats.forEach(stat => {
+      consts.forEach(stat => {
         if (data.hasOwnProperty(stat.receive)) {
           $(stat.element).text(data[stat.receive]);
         }
